@@ -10,7 +10,6 @@ dns:
     - '+.komect.com'
     - '+.qq.com'
     - '*'
-    - '+.cn'
     - '+.lan'
     - '+.msftncsi.com'
     - '+.msftconnecttest.com'
