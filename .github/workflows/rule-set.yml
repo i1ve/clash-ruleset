@@ -49,12 +49,6 @@ jobs:
           cat ./tmp/temp-networktest.txt > ./publish/networktest.yaml
           rm -f ./tmp/temp-networktest.txt
 
-      - name: Generate google-cn
-        env:
-          SED: sed '/^\s*#/d' | sed '/^$/d' | sed '/googleapis.cn/d' | sed 's/^-\s"/  &/'
-        run: |
-          curl -sSL https://rules.kr328.app/google@cn.yaml | ${{ env.SED }} > ./publish/google-cn.yaml
-
       - name: Put together user.yaml
         env:
           SED: sed 's/^/    - /'
