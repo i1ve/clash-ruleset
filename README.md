@@ -5,7 +5,7 @@
 3. networktest.yaml 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-ruleset/blob/main/rule-files/network.yaml)组合
 4. google-cn.yaml 源采用 [rules.kr328.app/google@cn](https://rules.kr328.app/google@cn.yaml)（删除 `'+.googleapis.cn'`，以免直连时出现 [Google Play Store](https://play.google.com/store) 无法下载或升级应用的问题）
 5. user.yaml  
-① 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/clash-ruleset/fork)后编辑 *.github/workflows/run.yml* 内的 `name: Put together user.yaml` 部分和 *UserConfig* 目录下的.yaml 文件  
+① 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/clash-ruleset/fork)后编辑 *.github/workflows/run.yml* 内的 `name: Put together user.yaml` 部分和 *User-Config* 目录下的.yaml 文件  
 ② 编辑 *MyConfig/later-user.yaml* 文件，将 `nameserver` 中的`🪜 代理域名`改成可以访问外网的代理组名，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'`修改为 `tls://dns.google`  
 ③ 添加 [NTP 服务](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/NTPService)到 user.yaml 内的 `fake-ip-filter` 中，防止校时失败  
 ④ 添加 [TrackersList](https://trackerslist.com) 到 user.yaml 内的 `fake-ip-filter` 中，防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition)无法连接 TrackersList UDP 协议
