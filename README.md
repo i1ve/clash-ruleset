@@ -47,21 +47,21 @@ rule-providers:
   reject:
     type: http
     behavior: classical
-    url: "https://fastly.jsdelivr.net/gh/DustinWin/clash-ruleset@release/reject.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/reject.yaml"
     path: ./ruleset/reject.yaml
     interval: 86400
 
   networktest:
     type: http
     behavior: classical
-    url: "https://fastly.jsdelivr.net/gh/DustinWin/clash-ruleset@release/networktest.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/networktest.yaml"
     path: ./ruleset/networktest.yaml
     interval: 86400
 
   google-cn:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/DustinWin/clash-ruleset@release/google-cn.yaml"
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/google-cn.yaml"
     path: ./ruleset/google-cn.yaml
     interval: 86400
 
