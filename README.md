@@ -1,6 +1,6 @@
 # 自定义 rule-set
 # 一、 说明
-1. 每天早上 3 点（北京时间）自动构建生成 reject.yaml 和 user.yaml
+1. 每天早上 3 点（北京时间）自动构建生成 reject.yaml、networktest.yaml、google-cn.yaml 和 user.yaml
 2. reject.yaml 源采用 [blackmatrix7/ios_rule_script/AdvertisingLite](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/AdvertisingLite)、[blackmatrix7/ios_rule_script/Hijacking](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Hijacking) 和 [blackmatrix7/ios_rule_script/Privacy](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Privacy) 组合
 3. networktest.yaml 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-ruleset/blob/main/rule-files/network.yaml)组合
 4. google-cn.yaml 源采用 [rules.kr328.app/google@cn](https://rules.kr328.app/google@cn.yaml)（删除 `'+.googleapis.cn'`，以免直连时出现 [Google Play Store](https://play.google.com/store) 无法下载或升级应用的问题）
