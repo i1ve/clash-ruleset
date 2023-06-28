@@ -63,3 +63,83 @@ curl -o $clashdir/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-rules
 ```
 curl -o %USERPROFILE%\.config\clash-verge\profiles\{文件名}.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/user.yaml
 ```
+# 三、 推荐配置
+- 注：以下只是节选，请酌情套用
+
+```
+rule-providers:
+  reject:
+    type: http
+    behavior: domain
+    url: 'https://fastly.jsdelivr.net/gh/privacy-protection-tools/anti-AD@master/anti-ad-clash.yaml'
+    path: ./ruleset/reject.yaml
+    interval: 86400
+
+  lan:
+    type: http
+    behavior: classical
+    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml'
+    path: ./ruleset/lan.yaml
+    interval: 86400
+
+  networktest:
+    type: http
+    behavior: classical
+    url: 'https://fastly.jsdelivr.net/gh/DustinWin/clash-ruleset@release/networktest.yaml'
+    path: ./ruleset/networktest.yaml
+    interval: 86400
+
+  microsoft-cn:
+    type: http
+    behavior: domain
+    url: 'https://rules.kr328.app/microsoft@cn.yaml'
+    path: ./ruleset/microsoft-cn.yaml
+    interval: 86400
+
+  apple-cn:
+    type: http
+    behavior: domain
+    url: 'https://rules.kr328.app/apple@cn.yaml'
+    path: ./ruleset/apple-cn.yaml
+    interval: 86400
+
+  google-cn:
+    type: http
+    behavior: domain
+    url: 'https://fastly.jsdelivr.net/gh/DustinWin/clash-ruleset@release/google-cn.yaml'
+    path: ./ruleset/google-cn.yaml
+    interval: 86400
+
+  games-cn:
+    type: http
+    behavior: domain
+    url: 'https://rules.kr328.app/category-games@cn.yaml'
+    path: ./ruleset/games-cn.yaml
+    interval: 86400
+
+  proxy:
+    type: http
+    behavior: classical
+    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Proxy/Proxy_Classical.yaml'
+    path: ./ruleset/proxy.yaml
+    interval: 86400
+
+  direct:
+    type: http
+    behavior: classical
+    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml'
+    path: ./ruleset/direct.yaml
+    interval: 86400
+
+rules:
+  - RULE-SET,reject,⛔️ 广告域名
+  - RULE-SET,lan,🏠 私有网络
+  - RULE-SET,networktest,📈 网络测试
+  - RULE-SET,microsoft-cn,Ⓜ️ Microsoft 中国
+  - RULE-SET,apple-cn,🍎 Apple 中国
+  - RULE-SET,google-cn,🗽 Google 中国
+  - RULE-SET,games-cn,🎮 国区游戏
+  - RULE-SET,proxy,🪜 代理域名
+  - RULE-SET,direct,⚡ 直连域名
+  - MATCH,🐟 漏网之鱼
+```
