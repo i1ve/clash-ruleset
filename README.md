@@ -63,7 +63,7 @@ curl -o $clashdir/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-rules
 ```
 curl -o %USERPROFILE%\.config\clash-verge\profiles\{文件名}.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/user.yaml
 ```
-# 三、 推荐配置
+## 3. 推荐配置
 - 注：以下只是节选，请酌情套用
 
 ```
