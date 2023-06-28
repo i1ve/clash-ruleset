@@ -71,21 +71,21 @@ rule-providers:
   reject:
     type: http
     behavior: domain
-    url: 'https://fastly.jsdelivr.net/gh/privacy-protection-tools/anti-AD@master/anti-ad-clash.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/privacy-protection-tools/anti-AD@master/anti-ad-clash.yaml'
     path: ./ruleset/reject.yaml
     interval: 86400
 
   lan:
     type: http
     behavior: classical
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml'
     path: ./ruleset/lan.yaml
     interval: 86400
 
   networktest:
     type: http
     behavior: classical
-    url: 'https://fastly.jsdelivr.net/gh/DustinWin/clash-ruleset@release/networktest.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/networktest.yaml'
     path: ./ruleset/networktest.yaml
     interval: 86400
 
@@ -106,7 +106,7 @@ rule-providers:
   google-cn:
     type: http
     behavior: domain
-    url: 'https://fastly.jsdelivr.net/gh/DustinWin/clash-ruleset@release/google-cn.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/google-cn.yaml'
     path: ./ruleset/google-cn.yaml
     interval: 86400
 
@@ -120,14 +120,14 @@ rule-providers:
   proxy:
     type: http
     behavior: classical
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Proxy/Proxy_Classical.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Proxy/Proxy_Classical.yaml'
     path: ./ruleset/proxy.yaml
     interval: 86400
 
   direct:
     type: http
     behavior: classical
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml'
     path: ./ruleset/direct.yaml
     interval: 86400
 
