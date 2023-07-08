@@ -1,7 +1,8 @@
 name: Delete old workflows
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '0 13 * * *'
+    - cron: '21 13 * * *'
 
 jobs:
   del_runs:
