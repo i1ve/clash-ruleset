@@ -1,6 +1,9 @@
 unified-delay: false
 tcp-concurrent: true
 
+find-process-mode: strict
+global-client-fingerprint: chrome
+
 profile:
   store-selected: true
   store-fake-ip: true
