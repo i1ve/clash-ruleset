@@ -1,3 +1,10 @@
+unified-delay: false
+tcp-concurrent: true
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
 dns:
   enable: true
   prefer-h3: true
