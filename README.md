@@ -16,22 +16,11 @@
 
 ```
 proxy-groups:
-  - name: 📈 网络测试
-    type: select
-    proxies:
-      - 🎯 全球直连
-      - 🚀 节点选择
+  - {name: 📈 网络测试, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
 
-  - name: 🗽 Google 中国
-    type: select
-    proxies:
-      - 🎯 全球直连
-      - 🚀 节点选择
+  - {name: 🗽 Google 中国, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
 
-  - name: 🎯 全球直连
-    type: select
-    proxies:
-      - DIRECT
+  - {name: 🎯 全球直连, type: select, proxies: [DIRECT]}
 
 rule-providers:
   networktest:
