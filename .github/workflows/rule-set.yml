@@ -50,6 +50,7 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/DustinWin/clash-ruleset/main/user-config/fake-ip-mode/later-user.yaml >> ./tmp/fake-ip-user.txt
           cat ./tmp/fake-ip-user.txt > ./publish/fake-ip-user.yaml
           rm -f ./tmp/fake-ip-user.txt
+
       - name: Generate redir-host-user.yaml
         run: |
           curl -sSL https://raw.githubusercontent.com/DustinWin/clash-ruleset/main/user-config/redir-host-mode/front-user.yaml > ./tmp/redir-host-user.txt
