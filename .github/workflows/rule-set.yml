@@ -45,7 +45,7 @@ jobs:
         env:
           SED: sed 's/^/    - /'
         run: |
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-ruleset/main/user-config/front-user.yaml > ./tmp/temp-user.txt
+          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-ruleset/main/user-config/fake-ip-mode/front-user.yaml > ./tmp/temp-user.txt
           curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' | ${{ env.SED }} >> ./tmp/temp-user.txt
           curl -sSL https://raw.githubusercontent.com/DustinWin/clash-ruleset/main/user-config/fake-ip-mode/later-user.yaml >> ./tmp/temp-user.txt
           cat ./tmp/temp-user.txt > ./publish/fake-ip-user.yaml
@@ -54,7 +54,7 @@ jobs:
         env:
           SED: sed 's/^/    - /'
         run: |
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-ruleset/main/user-config/front-user.yaml > ./tmp/temp-user.txt
+          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-ruleset/main/user-config/redir-host-mode/front-user.yaml > ./tmp/temp-user.txt
           curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' | ${{ env.SED }} >> ./tmp/temp-user.txt
           curl -sSL https://raw.githubusercontent.com/DustinWin/clash-ruleset/main/user-config/redir-host-mode/later-user.yaml >> ./tmp/temp-user.txt
           cat ./tmp/temp-user.txt > ./publish/redir-host-user.yaml
