@@ -34,10 +34,10 @@ jobs:
           mkdir -p ./publish
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest.yaml > ./tmp/temp-networktest.txt
           cat <<EOF >> ./tmp/temp-networktest.txt
-          keyword:test-ipv6
-          keyword:testipv6
-          keyword:ipv6-test
-          keyword:ipv6test
+            - DOMAIN-KEYWORD,test-ipv6
+            - DOMAIN-KEYWORD,testipv6
+            - DOMAIN-KEYWORD,ipv6-test
+            - DOMAIN-KEYWORD,ipv6test
           EOF
           cat ./tmp/temp-networktest.txt > ./publish/networktest.yaml
           rm -f ./tmp/temp-networktest.txt
