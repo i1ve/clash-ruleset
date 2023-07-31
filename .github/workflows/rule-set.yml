@@ -45,20 +45,77 @@ jobs:
         env:
           SED: sed 's/^/    - /'
         run: |
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-ruleset/main/user-config/fake-ip-mode/front-user.yaml > ./tmp/temp-fake-ip-user.txt
+          cat <<EOF > ./tmp/temp-fake-ip-user.txt
+          unified-delay: false
+          tcp-concurrent: true
+
+          find-process-mode: strict
+          global-client-fingerprint: chrome
+
+          profile:
+            store-selected: true
+            store-fake-ip: true
+
+          dns:
+            enable: true
+            prefer-h3: true
+            ipv6: true
+            listen: 0.0.0.0:1053
+            use-hosts: true
+            fake-ip-range: 198.18.0.1/16
+            enhanced-mode: fake-ip
+            fake-ip-filter:
+              - '*'
+              - '+.lan'
+              - '+.local'
+          EOF
           curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | sed '/^\s*#/d' | grep -E "\*|\+" | sed "s/.*/'&'/" | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
           curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | sed '/^\s*#/d' | grep -vE "\*|\+" | grep '\.' | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
           curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-ruleset/main/user-config/fake-ip-mode/later-user.yaml >> ./tmp/temp-fake-ip-user.txt
+          cat <<EOF >> ./tmp/temp-fake-ip-user.txt
+            default-nameserver:
+              - https://1.12.12.12/dns-query
+              - https://223.5.5.5/dns-query
+            nameserver:
+              - https://doh.pub/dns-query
+              - https://dns.alidns.com/dns-query
+          EOF
           cat ./tmp/temp-fake-ip-user.txt > ./publish/fake-ip-user.yaml
           rm -f ./tmp/temp-fake-ip-user.txt
 
       - name: Generate redir-host-user.yaml
         run: |
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-ruleset/main/user-config/redir-host-mode/front-user.yaml > ./tmp/temp-redir-host-user.txt
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-ruleset/main/user-config/redir-host-mode/later-user.yaml >> ./tmp/temp-redir-host-user.txt
-          cat ./tmp/temp-redir-host-user.txt > ./publish/redir-host-user.yaml
-          rm -f ./tmp/temp-redir-host-user.txt
+          cat <<EOF > ./publish/redir-host-user.yaml
+          unified-delay: false
+          tcp-concurrent: true
+
+          find-process-mode: strict
+          global-client-fingerprint: chrome
+
+          profile:
+            store-selected: true
+
+          dns:
+            enable: true
+            prefer-h3: true
+            ipv6: true
+            listen: 0.0.0.0:1053
+            use-hosts: true
+            enhanced-mode: redir-host
+            default-nameserver:
+              - https://1.12.12.12/dns-query
+              - https://223.5.5.5/dns-query
+            nameserver:
+              - 'https://dns.google/dns-query#🪜 代理域名'
+              - https://dns.cloudflare.com/dns-query
+              - https://doh.opendns.com/dns-query
+            proxy-server-nameserver:
+              - https://doh.pub/dns-query
+              - https://dns.alidns.com/dns-query
+            nameserver-policy:
+              'rule-set:networktest,microsoft-cn,apple-cn,google-cn,games-cn': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
+              'rule-set:direct,lan': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
+          EOF
 
       - name: Move files
         run: |
