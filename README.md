@@ -5,8 +5,8 @@
 3. google-cn.yaml 源采用 [rules.kr328.app/google@cn](https://rules.kr328.app/google@cn.yaml)（删除 `'+.googleapis.cn'`，以免直连时出现 [Google Play Store](https://play.google.com/store) 无法下载或升级应用的问题）
 4. user.yaml  
 ① 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/clash-ruleset/fork)后编辑 *.github/workflows/run.yml* 内的 `name: Generate xxx-user.yaml` 部分和 *User-Config* 子目录下的.yaml 文件  
-② 若 DNS 模式选用的是 redir-host，需要编辑 *User-Config/redir-host-mode/later-user.yaml* 文件，将 `nameserver` 中的`🪜 代理域名`改成可以访问外网的代理组名，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'`修改为 `'tls://dns.google'`
-③ 添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellClash/blob/master/public/fake_ip_filter.list)到 fake-ip-user.yaml 内的 fake-ip-filter 中，提高兼容性
+② 若 DNS 模式选用的是 redir-host，需要编辑 *User-Config/redir-host-mode/later-user.yaml* 文件，将 `nameserver` 中的`🪜 代理域名`改成可以访问外网的代理组名，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'`修改为 `'tls://dns.google'`  
+③ 添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellClash/blob/master/public/fake_ip_filter.list)到 fake-ip-user.yaml 内的 fake-ip-filter 中，提高兼容性  
 ④ 添加 [TrackersList](https://trackerslist.com) 到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)无法连接 TrackersList UDP 协议  
 <img src="https://user-images.githubusercontent.com/45238096/224113233-4d76dec2-495c-4790-a00e-538fc1469639.png" width="60%"/>  
 
