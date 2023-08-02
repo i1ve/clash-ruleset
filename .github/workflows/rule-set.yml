@@ -81,15 +81,6 @@ jobs:
       - name: Generate redir-host-user.yaml
         run: |
           cat <<EOF > ./publish/redir-host-user.yaml
-          unified-delay: false
-          tcp-concurrent: true
-
-          find-process-mode: strict
-          global-client-fingerprint: chrome
-
-          profile:
-            store-selected: true
-
           dns:
             enable: true
             prefer-h3: true
