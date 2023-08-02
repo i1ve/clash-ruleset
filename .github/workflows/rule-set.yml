@@ -51,16 +51,6 @@ jobs:
           SED: sed 's/^/    - /'
         run: |
           cat <<EOF > ./tmp/temp-fake-ip-user.txt
-          unified-delay: false
-          tcp-concurrent: true
-
-          find-process-mode: strict
-          global-client-fingerprint: chrome
-
-          profile:
-            store-selected: true
-            store-fake-ip: true
-
           dns:
             enable: true
             prefer-h3: true
