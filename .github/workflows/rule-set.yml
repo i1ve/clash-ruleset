@@ -51,6 +51,10 @@ jobs:
           SED: sed 's/^/    - /'
         run: |
           cat <<EOF > ./tmp/temp-fake-ip-user.txt
+          profile:
+            store-selected: true
+            store-fake-ip: true
+
           dns:
             enable: true
             prefer-h3: true
@@ -60,9 +64,6 @@ jobs:
             fake-ip-range: 198.18.0.1/16
             enhanced-mode: fake-ip
             fake-ip-filter:
-              - '*'
-              - '+.lan'
-              - '+.local'
           EOF
           curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | sed '/^\s*#/d' | grep -E "\*|\+" | sed "s/.*/'&'/" | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
           curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | sed '/^\s*#/d' | grep -vE "\*|\+" | grep '\.' | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
@@ -81,6 +82,9 @@ jobs:
       - name: Generate redir-host-user.yaml
         run: |
           cat <<EOF > ./publish/redir-host-user.yaml
+          profile:
+            store-selected: true
+
           dns:
             enable: true
             prefer-h3: true
