@@ -43,7 +43,20 @@ rules:
   - RULE-SET,google-cn,🗽 Google 中国
 ```
 ## 2. user.yaml
-导入 [Clash Verge](https://github.com/zzzgydi/clash-verge)（Windows 端）  
+① 导入 [ShellClash](https://github.com/juewuy/ShellClash)  
+DNS 模式为 fake-ip  
+连接 SSH 后执行如下命令：
+```
+curl -o $clashdir/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/fake-ip-user.yaml
+$clashdir/start.sh restart
+```
+DNS 模式为 redir-host  
+连接 SSH 后执行如下命令：
+```
+curl -o $clashdir/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/redir-host-user.yaml
+$clashdir/start.sh restart
+```
+② 导入 [Clash Verge](https://github.com/zzzgydi/clash-verge)（Windows 端）  
 首次使用可进入“配置”，新建”Merge“类型的配置，保存后进入文件夹 *%USERPROFILE%.config\clash-verge\profiles*，可以看到这里新增了一个.yaml 文件，复制其文件名并替换下面命令中的{文件名}；将下面命令中的{DNS 模式}替换为正在使用的 DNS 模式（fake-ip 或 redir-host）  
 以管理员身份打开 CMD 命令提示符，执行如下命令：
 ```
