@@ -1,0 +1,28 @@
+unified-delay: false
+tcp-concurrent: true
+
+global-client-fingerprint: chrome
+
+profile:
+  store-selected: true
+
+dns:
+  enable: true
+  prefer-h3: true
+  ipv6: true
+  listen: 0.0.0.0:1053
+  use-hosts: true
+  enhanced-mode: redir-host
+  default-nameserver:
+    - https://1.12.12.12/dns-query
+    - https://223.5.5.5/dns-query
+  nameserver:
+    - 'https://dns.google/dns-query#🪜 代理域名'
+    - https://dns.cloudflare.com/dns-query
+    - https://doh.opendns.com/dns-query
+  proxy-server-nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  nameserver-policy:
+    'rule-set:networktest,microsoft-cn,apple-cn,google-cn,games-cn': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
+    'rule-set:direct,lan': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
