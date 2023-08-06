@@ -1,0 +1,108 @@
+name: Generate user.yaml
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 19 * * *"
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "README.md"
+      - ".github/workflows/delete-old-workflows.yml"
+      - ".github/workflows/rule-set.yml"
+
+jobs:
+  Update:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Clone Repository
+      uses: actions/checkout@main
+
+    - name: Generate fake-ip-user.yaml
+      env:
+        SED: sed 's/^/    - /'
+      run: |
+        echo "update_version=$(date +%Y-%m-%d)" >> ${GITHUB_ENV}
+        mkdir -p ./tmp
+        midir -p ./shellclash-userconfig
+        rm -rf ./shellclash-userconfig/*
+        cat <<EOF > ./tmp/temp-fake-ip-user.txt
+        unified-delay: false
+        tcp-concurrent: true
+
+        global-client-fingerprint: chrome
+
+        profile:
+          store-selected: true
+          store-fake-ip: true
+
+        dns:
+          enable: true
+          prefer-h3: true
+          ipv6: true
+          listen: 0.0.0.0:1053
+          use-hosts: true
+          fake-ip-range: 198.18.0.1/16
+          enhanced-mode: fake-ip
+          fake-ip-filter:
+        EOF
+        curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | sed '/^\s*#/d' | grep -E "\*|\+" | sed "s/.*/'&'/" | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
+        curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | sed '/^\s*#/d' | grep -vE "\*|\+" | grep '\.' | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
+        curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
+        cat <<EOF >> ./tmp/temp-fake-ip-user.txt
+          default-nameserver:
+            - https://1.12.12.12/dns-query
+            - https://223.5.5.5/dns-query
+          nameserver:
+            - https://doh.pub/dns-query
+            - https://dns.alidns.com/dns-query
+        EOF
+        cat ./tmp/temp-fake-ip-user.txt > ./shellclash-userconfig/fake-ip-user.yaml
+        rm -f ./tmp
+
+    - name: Generate redir-host-user.yaml
+      run: |
+        cat <<EOF > ./shellclash-userconfig/redir-host-user.yaml
+        unified-delay: false
+        tcp-concurrent: true
+
+        global-client-fingerprint: chrome
+
+        profile:
+          store-selected: true
+
+        dns:
+          enable: true
+          prefer-h3: true
+          ipv6: true
+          listen: 0.0.0.0:1053
+          use-hosts: true
+          enhanced-mode: redir-host
+          default-nameserver:
+            - https://1.12.12.12/dns-query
+            - https://223.5.5.5/dns-query
+          nameserver:
+            - 'https://dns.google/dns-query#🪜 代理域名'
+            - https://dns.cloudflare.com/dns-query
+            - https://doh.opendns.com/dns-query
+          proxy-server-nameserver:
+            - https://doh.pub/dns-query
+            - https://dns.alidns.com/dns-query
+          nameserver-policy:
+            'rule-set:networktest,microsoft-cn,apple-cn,google-cn,games-cn': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
+            'rule-set:direct,lan': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
+        EOF
+
+    - name: Commit and push
+      run: |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+        git add . && git commit -m "更新于 ${update_version}" || exit 0
+        git push -f
+
+    - name: Purge jsDelivr CDN cache
+      uses: gacts/purge-jsdelivr-cache@v1
+      with:
+        url: |  
+          https://cdn.jsdelivr.net/gh/${{ github.repository }}@main/shellclash-userconfig/fake-ip-user.yaml
+          https://cdn.jsdelivr.net/gh/${{ github.repository }}@main/shellclash-userconfig/redir-host-user.yaml
