@@ -128,8 +128,10 @@ dns:
     - incine.ru
     - li2021-95.members.linode.com
     - montreal.nyap2p.com
+    - movies.zsw.ca
     - nyaa.tracker.wf
     - open.acgnxtracker.com
+    - open.acgtracker.com
     - open.tracker.ink
     - p2p.0g.cx
     - retracker.hotplug.ru
@@ -137,7 +139,6 @@ dns:
     - shubt.net
     - t.acg.rip
     - t.nyaatracker.com
-    - t.publictracker.xyz
     - torrentsmd.com
     - tracker.birkenwald.de
     - tracker.bt4g.com
@@ -152,8 +153,6 @@ dns:
     - tracker.qu.ax
     - tracker.renfei.net
     - tracker.sheesh.rip
-    - tracker.skyts.net
-    - tracker2.dler.org
     - tracker4.itzmx.com
     - v6-tracker.0g.cx
     - wepzone.net
@@ -208,6 +207,7 @@ dns:
     - mail.artixlinux.org
     - mail.segso.net
     - market-re.quest
+    - mikrotik2.draatman.net
     - moonburrow.club
     - movies.zsw.ca
     - new-line.net
