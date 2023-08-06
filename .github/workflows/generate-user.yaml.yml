@@ -24,7 +24,7 @@ jobs:
       run: |
         echo "update_version=$(date +%Y-%m-%d)" >> ${GITHUB_ENV}
         mkdir -p ./tmp
-        midir -p ./shellclash-userconfig
+        mkdir -p ./shellclash-userconfig
         rm -rf ./shellclash-userconfig/*
         cat <<EOF > ./tmp/temp-fake-ip-user.txt
         unified-delay: false
@@ -58,7 +58,7 @@ jobs:
             - https://dns.alidns.com/dns-query
         EOF
         cat ./tmp/temp-fake-ip-user.txt > ./shellclash-userconfig/fake-ip-user.yaml
-        rm -f ./tmp
+        rm -rf ./tmp
 
     - name: Generate redir-host-user.yaml
       run: |
