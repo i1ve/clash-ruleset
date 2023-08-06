@@ -4,14 +4,13 @@
 2. networktest.yaml 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-ruleset/blob/main/rule-files/network.yaml)组合
 3. google-cn.yaml 源采用 [rules.kr328.app/google@cn](https://rules.kr328.app/google@cn.yaml)（删除 `'+.googleapis.cn'`，以免直连时出现 [Google Play Store](https://play.google.com/store) 无法下载或升级应用的问题）
 4. user.yaml  
-① 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/clash-ruleset/fork)后编辑 *.github/workflows/run.yml* 内的 `name: Generate xxx-user.yaml` 部分和 *User-Config* 子目录下的.yaml 文件  
-② 若 DNS 模式选用的是 redir-host，需要编辑 *User-Config/redir-host-mode/later-user.yaml* 文件，将 `nameserver` 中的`🪜 代理域名`改成可以访问外网的代理组名，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'`修改为 `'tls://dns.google'`  
+① 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/clash-ruleset/fork)后编辑 *.github/workflows/rule-set.yml* 和 *.github/workflows/generate-userconfig.yml* 文件内的 `name: Generate xxx-user.yaml` 部分  
+② 若 DNS 模式选用的是 redir-host，需要编辑 *.github/workflows/rule-set.yml* 和 *.github/workflows/generate-userconfig.yml* 文件内的 `name: Generate redir-host-user.yaml` 部分，将 `nameserver` 中的`🪜 代理域名`改成可以访问外网的代理组名，或者直接将 `'https://dns.google/dns-query#🪜 代理域名'`修改为 `'tls://dns.google'`  
 ③ 添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellClash/blob/master/public/fake_ip_filter.list)到 fake-ip-user.yaml 内的 fake-ip-filter 中，提高兼容性  
 ④ 添加 [TrackersList](https://trackerslist.com) 到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)无法连接 TrackersList UDP 协议  
 <img src="https://user-images.githubusercontent.com/45238096/224113233-4d76dec2-495c-4790-a00e-538fc1469639.png" width="60%"/>  
 
 # 二、 使用方法
-## 1. rule-set
 在配置文件中新增如下内容：
 - 注：以下只是节选，请酌情套用
 
@@ -42,21 +41,21 @@ rules:
   - RULE-SET,networktest,📈 网络测试
   - RULE-SET,google-cn,🗽 Google 中国
 ```
-## 2. user.yaml
-① 导入 [ShellClash](https://github.com/juewuy/ShellClash)  
-DNS 模式为 fake-ip  
+# 三、 导入 user.yaml
+## 1. 导入 [ShellClash](https://github.com/juewuy/ShellClash)
+① DNS 模式为 fake-ip  
 连接 SSH 后执行如下命令：
 ```
-curl -o $clashdir/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/fake-ip-user.yaml
+curl -o $clashdir/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@main/shellclash-userconfig/fake-ip-user.yaml
 $clashdir/start.sh restart
 ```
-DNS 模式为 redir-host  
+② DNS 模式为 redir-host  
 连接 SSH 后执行如下命令：
 ```
-curl -o $clashdir/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/redir-host-user.yaml
+curl -o $clashdir/yamls/user.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@main/shellclash-userconfig/redir-host-user.yaml
 $clashdir/start.sh restart
 ```
-② 导入 [Clash Verge](https://github.com/zzzgydi/clash-verge)（Windows 端）  
+## 2. 导入 [Clash Verge](https://github.com/zzzgydi/clash-verge)（Windows 端）
 首次使用可进入“配置”，新建“Merge”类型的配置，完成后点击“保存”，右击新建的 Merge 文件，选择“启用”  
 进入文件夹 *%USERPROFILE%.config\clash-verge\profiles*，可以看到这里新增了一个.yaml 文件，复制其文件名并替换下面命令中的{文件名}；将下面命令中的{DNS 模式}替换为正在使用的 DNS 模式（fake-ip 或 redir-host）  
 以管理员身份打开 CMD 命令提示符，执行如下命令：
