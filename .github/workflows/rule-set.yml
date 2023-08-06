@@ -9,7 +9,7 @@ on:
     paths-ignore:
       - "README.md"
       - ".github/workflows/delete-old-workflows.yml"
-      - ".github/workflows/generate-user.yaml.yml"
+      - ".github/workflows/generate-userconfig.yml"
 
 jobs:
   build:
