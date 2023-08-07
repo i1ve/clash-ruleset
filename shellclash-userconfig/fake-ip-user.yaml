@@ -123,6 +123,7 @@ dns:
     - shark007.net
     - local.adguard.org
     - 1337.abcvg.info
+    - bt.endpot.com
     - bt.okmp3.ru
     - canardscitrons.nohost.me
     - incine.ru
@@ -131,7 +132,6 @@ dns:
     - movies.zsw.ca
     - nyaa.tracker.wf
     - open.acgnxtracker.com
-    - open.acgtracker.com
     - open.tracker.ink
     - p2p.0g.cx
     - retracker.hotplug.ru
@@ -139,10 +139,10 @@ dns:
     - shubt.net
     - t.acg.rip
     - t.nyaatracker.com
+    - t.publictracker.xyz
     - torrentsmd.com
     - tracker.birkenwald.de
     - tracker.bt4g.com
-    - tracker.dler.com
     - tracker.dler.org
     - tracker.electro-torrent.pl
     - tracker.files.fm
@@ -153,6 +153,7 @@ dns:
     - tracker.qu.ax
     - tracker.renfei.net
     - tracker.sheesh.rip
+    - tracker.skyts.net
     - tracker4.itzmx.com
     - v6-tracker.0g.cx
     - wepzone.net
@@ -167,7 +168,6 @@ dns:
     - tracker.bangumi.zip
     - tracker.foreverpirates.co
     - tracker.gbitt.info
-    - tracker.imgoingto.icu
     - tracker.ipfsscan.io
     - tracker.jiesen.life
     - tracker.kuroy.me
@@ -261,7 +261,6 @@ dns:
     - tracker.cubonegro.lol
     - tracker.cyberia.is
     - tracker.ddunlimited.net
-    - tracker.dler.com
     - tracker.dler.org
     - tracker.dump.cl
     - tracker.farted.net
@@ -269,7 +268,6 @@ dns:
     - tracker.leech.ie
     - tracker.moeking.me
     - tracker.ocnix.net
-    - tracker.openbittorrent.com
     - tracker.opentrackr.org
     - tracker.qu.ax
     - tracker.sheesh.rip
@@ -292,6 +290,7 @@ dns:
     - u4.trakx.crim.ist
     - uploads.gamecoast.net
     - v1046920.hosted-by-vdsina.ru
+    - v2.iperson.xyz
     - vm3268418.24ssd.had.wf
     - wepzone.net
     - yahor.of.by
