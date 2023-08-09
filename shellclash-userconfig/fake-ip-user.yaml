@@ -130,14 +130,12 @@ dns:
     - montreal.nyap2p.com
     - nyaa.tracker.wf
     - open.acgnxtracker.com
-    - open.tracker.ink
     - p2p.0g.cx
     - retracker.hotplug.ru
     - share.camoe.cn
     - shubt.net
     - t.acg.rip
     - t.nyaatracker.com
-    - t.publictracker.xyz
     - torrentsmd.com
     - tracker.birkenwald.de
     - tracker.bt4g.com
@@ -149,9 +147,11 @@ dns:
     - tracker.ipv6tracker.ru
     - tracker.mywaifu.best
     - tracker.opentrackr.org
+    - tracker.qu.ax
     - tracker.renfei.net
     - tracker.sheesh.rip
     - tracker.skyts.net
+    - tracker1.bt.moack.co.kr
     - tracker4.itzmx.com
     - v6-tracker.0g.cx
     - wepzone.net
@@ -204,7 +204,6 @@ dns:
     - globalwave.no-ip.org
     - htz3.noho.st
     - ipv6.fuuuuuck.com
-    - isk.richardsw.club
     - mail.artixlinux.org
     - mail.segso.net
     - market-re.quest
@@ -216,7 +215,6 @@ dns:
     - oh.fuuuuuck.com
     - open.demonii.com
     - open.dstud.io
-    - open.free-tracker.ga
     - open.publictracker.xyz
     - open.stealth.si
     - open.tracker.ink
@@ -244,7 +242,6 @@ dns:
     - t.133335.xyz
     - t.zerg.pw
     - tamas3.ynh.fr
-    - thinking.duckdns.org
     - thouvenin.cloud
     - tk1.trackerservers.com
     - tk1v6.trackerservers.com
@@ -260,6 +257,7 @@ dns:
     - tracker.ccp.ovh
     - tracker.cubonegro.lol
     - tracker.cyberia.is
+    - tracker.ddunlimited.net
     - tracker.dler.com
     - tracker.dler.org
     - tracker.dump.cl
