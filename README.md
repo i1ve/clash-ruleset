@@ -74,6 +74,13 @@ rule-providers:
     path: ./ruleset/reject.yaml
     interval: 86400
 
+  applications:
+    type: http
+    behavior: classical
+    url: 'https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt'
+    path: ./ruleset/applications.yaml
+    interval: 86400
+
   lan:
     type: http
     behavior: classical
@@ -132,6 +139,7 @@ rule-providers:
 
 rules:
   - RULE-SET,reject,⛔️ 广告域名
+  - RULE-SET,applications,📥 下载软件
   - RULE-SET,lan,🏠 私有网络
   - RULE-SET,networktest,📈 网络测试
   - RULE-SET,microsoft-cn,Ⓜ️ Microsoft 中国
