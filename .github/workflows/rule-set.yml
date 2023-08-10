@@ -52,10 +52,6 @@ jobs:
           SED: sed 's/^/    - /'
         run: |
           cat <<EOF > ./tmp/temp-fake-ip-user.txt
-          profile:
-            store-selected: true
-            store-fake-ip: true
-
           dns:
             enable: true
             prefer-h3: true
@@ -83,16 +79,15 @@ jobs:
       - name: Generate redir-host-user.yaml
         run: |
           cat <<EOF > ./publish/redir-host-user.yaml
-          profile:
-            store-selected: true
-
           dns:
             enable: true
             prefer-h3: true
             ipv6: true
             listen: 0.0.0.0:1053
             use-hosts: true
-            enhanced-mode: redir-host
+            fake-ip-range: 198.18.0.1/16
+            enhanced-mode: fake-ip
+            fake-ip-filter: ['+.*']
             default-nameserver:
               - https://1.12.12.12/dns-query
               - https://223.5.5.5/dns-query
