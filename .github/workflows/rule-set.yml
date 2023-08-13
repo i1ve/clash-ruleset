@@ -74,7 +74,7 @@ jobs:
               - https://dns.cloudflare.com/dns-query
               - https://doh.opendns.com/dns-query
             nameserver-policy:
-              'geosite:cn,lan': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
+              'rule-set:direct,lan': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
           EOF
           cat ./tmp/temp-fake-ip-user.txt > ./publish/fake-ip-user.yaml
           rm -f ./tmp/temp-fake-ip-user.txt
