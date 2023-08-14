@@ -70,10 +70,13 @@ jobs:
               - https://1.12.12.12/dns-query
               - https://223.5.5.5/dns-query
             nameserver:
-              - 'https://dns.google/dns-query#🔎 DNS 解析'
-              - https://dns.cloudflare.com/dns-query
+              - https://dns.google/dns-query
+              - https://cloudflare-dns.com/dns-query
               - https://doh.opendns.com/dns-query
+            proxy-server-nameserver:
+              - https://1.1.1.1/dns-query
             nameserver-policy:
+              'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
               'rule-set:direct,lan': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
           EOF
           cat ./tmp/temp-fake-ip-user.txt > ./publish/fake-ip-user.yaml
@@ -95,10 +98,13 @@ jobs:
               - https://1.12.12.12/dns-query
               - https://223.5.5.5/dns-query
             nameserver:
-              - 'https://dns.google/dns-query#🔎 DNS 解析'
-              - https://dns.cloudflare.com/dns-query
+              - https://dns.google/dns-query
+              - https://cloudflare-dns.com/dns-query
               - https://doh.opendns.com/dns-query
+            proxy-server-nameserver:
+              - https://1.1.1.1/dns-query
             nameserver-policy:
+              'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
               'rule-set:direct,lan': [https://doh.pub/dns-query, https://dns.alidns.com/dns-query]
           EOF
 
