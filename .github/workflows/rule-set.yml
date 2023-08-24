@@ -45,7 +45,7 @@ jobs:
 
       - name: Generate google-cn
         run: |
-          curl -sSL https://rules.kr328.app/google@cn.yaml | grep -v googleapis.cn > ./publish/google-cn.yaml
+          curl -sSL https://rules.kr328.app/google@cn.yaml | grep -v "googleapis.cn" > ./publish/google-cn.yaml
 
       - name: Generate fake-ip-user.yaml
         env:
