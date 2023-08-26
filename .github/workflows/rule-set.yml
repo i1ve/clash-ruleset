@@ -52,11 +52,11 @@ jobs:
 
       - name: Generate cncidr
         run: |
-          curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_IP.yaml | grep -v "#" | sed '/^\s*$/d' > ./tmp/temp-cncidr.yaml
+          curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_IP.yaml | grep -v "#" | grep -v "payload:" | sed '/^\s*$/d' > ./tmp/temp-cncidr.yaml
           curl -sSL https://raw.githubusercontent.com/17mon/china_ip_list/master/china_ip_list.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '/^\s*$/d' >> ./tmp/temp-cncidr.yaml
           curl -sSL https://raw.githubusercontent.com/gaoyifan/china-operator-ip/ip-lists/china.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '/^\s*$/d' >> ./tmp/temp-cncidr.yaml
           curl -sSL https://raw.githubusercontent.com/gaoyifan/china-operator-ip/ip-lists/china6.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '/^\s*$/d' >> ./tmp/temp-cncidr.yaml
-          awk '!seen[$0]++' ./tmp/temp-cncidr.yaml | sort > ./publish/cncidr.yaml
+          awk '!seen[$0]++' ./tmp/temp-cncidr.yaml | sed '1s/^/payload:\n/' | sort > ./publish/cncidr.yaml
 
       - name: Generate fake-ip-user.yaml
         env:
