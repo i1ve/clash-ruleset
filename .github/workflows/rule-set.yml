@@ -33,7 +33,7 @@ jobs:
         run: |
           mkdir -p ./tmp
           mkdir -p ./publish
-          curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest.yaml > ./tmp/temp-networktest.txt
+          curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest.yaml | grep -v "#" | sed '/^\s*$/d' > ./tmp/temp-networktest.txt
           cat <<EOF >> ./tmp/temp-networktest.txt
             - DOMAIN-KEYWORD,test-ipv6
             - DOMAIN-KEYWORD,testipv6
@@ -41,15 +41,26 @@ jobs:
             - DOMAIN-KEYWORD,ipv6test
           EOF
           cat ./tmp/temp-networktest.txt > ./publish/networktest.yaml
-          rm -f ./tmp/temp-networktest.txt
 
       - name: Generate google-cn
         run: |
-          curl -sSL https://rules.kr328.app/google@cn.yaml | grep -v 'googleapis\.cn' > ./publish/google-cn.yaml
+          curl -sSL https://rules.kr328.app/google@cn.yaml | grep -v "#" | grep -v 'googleapis\.cn' | sed '/^- "/s/^/  /' | sed '/^\s*$/d' > ./publish/google-cn.yaml
+
+      - name: Generate telegramcidr
+        run: |
+          curl -sSL https://core.telegram.org/resources/cidr.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/telegramcidr.yaml
+
+      - name: Generate cncidr
+        run: |
+          curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_IP.yaml | grep -v "#" | sed '/^\s*$/d' > ./tmp/temp-cncidr.yaml
+          curl -sSL https://raw.githubusercontent.com/17mon/china_ip_list/master/china_ip_list.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '/^\s*$/d' >> ./tmp/temp-cncidr.yaml
+          curl -sSL https://raw.githubusercontent.com/gaoyifan/china-operator-ip/ip-lists/china.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '/^\s*$/d' >> ./tmp/temp-cncidr.yaml
+          curl -sSL https://raw.githubusercontent.com/gaoyifan/china-operator-ip/ip-lists/china6.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '/^\s*$/d' >> ./tmp/temp-cncidr.yaml
+          awk '!seen[$0]++' ./tmp/temp-cncidr.yaml | sort > ./publish/cncidr.yaml
 
       - name: Generate fake-ip-user.yaml
         env:
-          SED: sed 's/^/    - /'
+          SED: sed 's/^/    - /' | sed '/^\s*$/d'
         run: |
           cat <<EOF > ./tmp/temp-fake-ip-user.txt
           dns:
@@ -62,8 +73,8 @@ jobs:
             enhanced-mode: fake-ip
             fake-ip-filter:
           EOF
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | grep -v "#" | sed '/^\s*$/d' | grep -E "\*|\+" | sed "s/.*/'&'/" | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | grep -v "#" | sed '/^\s*$/d' | grep -vE "\*|\+" | grep '\.' | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | grep -v "#" | grep -E "\*|\+" | sed "s/.*/'&'/" | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | grep -v "#"  | grep -vE "\*|\+" | grep '\.' | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
           curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed 's/^.*\/\///g' | sed 's/:.*\/.*//g' | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
           cat <<EOF >> ./tmp/temp-fake-ip-user.txt
             default-nameserver:
