@@ -16,7 +16,6 @@
   - RULE-SET,telegramcidr,✈️ Telegram IP
   - RULE-SET,lancidr,🏠 私有网络
   - RULE-SET,cncidr,🇨🇳 国内 IP
-  - MATCH,🐟 漏网之鱼
 ```
 ② 每天早上 3 点（北京时间）自动构建生成 networktest.yaml、google-cn.yaml 和 user.yaml  
 ③ `RULE-SET:ads` 源采用 [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
