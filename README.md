@@ -13,9 +13,9 @@
   - RULE-SET,games-cn,🎮 国区游戏
   - RULE-SET,proxy,🪜 代理域名
   - RULE-SET,cn,⚡ 直连域名
-  - RULE-SET,telegramcidr,✈️ Telegram IP
-  - RULE-SET,lancidr,🏠 私有网络
-  - RULE-SET,cncidr,🇨🇳 国内 IP
+  - RULE-SET,telegramip,✈️ Telegram IP
+  - RULE-SET,lanip,🏠 私有网络
+  - RULE-SET,cnip,🇨🇳 国内 IP
 ```
 ② 每天早上 3 点（北京时间）自动构建生成 networktest.yaml、google-cn.yaml 和 user.yaml  
 ③ `RULE-SET:ads` 源采用 [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
@@ -28,9 +28,9 @@
 ⑩ `RULE-SET:games-cn` 源采用 [rules.kr328.app/category-games@cn](https://rules.kr328.app/category-games@cn.yaml)  
 ⑪ `RULE-SET:proxy` 源采用 [blackmatrix7/ios_rule_script/Proxy](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy)  
 ⑫ `RULE-SET:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)  
-⑬ `RULE-SET:telegramcidr` 源采用 [Telegram IP](https://core.telegram.org/resources/cidr.txt)  
-⑭ `RULE-SET:lancidr` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）  
-⑮ `RULE-SET,cncidr` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（ChinaMax_IP.txt）、[17mon/china_ip_list](https://github.com/17mon/china_ip_list) 和 [gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 组合
+⑬ `RULE-SET:telegramip` 源采用 [Telegram IP](https://core.telegram.org/resources/cidr.txt)  
+⑭ `RULE-SET:lanip` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）  
+⑮ `RULE-SET,cnip` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（ChinaMax_IP.txt）、[17mon/china_ip_list](https://github.com/17mon/china_ip_list) 和 [gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 组合
 ## 2. user.yaml  
 ① 添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellClash/blob/master/public/fake_ip_filter.list)到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，提高兼容性  
 ② 添加 [TrackersList](https://trackerslist.com) 到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)无法连接 TrackersList UDP 协议<img src="https://user-images.githubusercontent.com/45238096/224113233-4d76dec2-495c-4790-a00e-538fc1469639.png" width="60%"/>  
@@ -128,7 +128,7 @@ rule-providers:
     type: http
     behavior: domain
     url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/proxy.yaml"
-    path: ./ruleset/lan.yaml
+    path: ./ruleset/proxy.yaml
     interval: 86400
 
   cn:
@@ -138,25 +138,25 @@ rule-providers:
     path: ./ruleset/cn.yaml
     interval: 86400
 
-  telegramcidr:
+  telegramip:
     type: http
     behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/telegramcidr.yaml"
-    path: ./ruleset/telegramcidr.yaml
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/telegramip.yaml"
+    path: ./ruleset/telegramip.yaml
     interval: 86400
 
-  lancidr:
+  lanip:
     type: http
     behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/lancidr.yaml"
-    path: ./ruleset/lancidr.yaml
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/lanip.yaml"
+    path: ./ruleset/lanip.yaml
     interval: 86400
 
-  cncidr:
+  cnip:
     type: http
     behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/cncidr.yaml"
-    path: ./ruleset/cncidr.yaml
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/cnip.yaml"
+    path: ./ruleset/cnip.yaml
     interval: 86400
 
 rules:
@@ -170,9 +170,9 @@ rules:
   - RULE-SET,games-cn,🎮 国区游戏
   - RULE-SET,proxy,🪜 代理域名
   - RULE-SET,cn,⚡ 直连域名
-  - RULE-SET,telegramcidr,✈️ Telegram IP
-  - RULE-SET,lancidr,🏠 私有网络
-  - RULE-SET,cncidr,🇨🇳 国内 IP
+  - RULE-SET,telegramip,✈️ Telegram IP
+  - RULE-SET,lanip,🏠 私有网络
+  - RULE-SET,cnip,🇨🇳 国内 IP
 ```
 # 三、 导入 [Clash Verge](https://github.com/zzzgydi/clash-verge)（Windows 端）
 1. 首次使用可进入 Clash Verge->配置，新建“Merge”类型的配置，完成后点击“保存”，右击新建的 Merge 文件，选择“启用”
