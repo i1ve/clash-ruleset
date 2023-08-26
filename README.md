@@ -1,9 +1,38 @@
 # 自定义 rule-set
 # 一、 说明
-1. 每天早上 3 点（北京时间）自动构建生成 networktest.yaml、google-cn.yaml 和 user.yaml
-2. networktest.yaml 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-ruleset/blob/main/rule-files/network.yaml)组合
-3. google-cn.yaml 源采用 [rules.kr328.app/google@cn](https://rules.kr328.app/google@cn.yaml)（删除 `'+.googleapis.cn'`，以免直连时出现 [Google Play Store](https://play.google.com/store) 无法下载或升级应用的问题）
-4. user.yaml  
+## 1. rule-set 规则
+① 规则参考 [Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules)，有如下分类：
+```
+  - RULE-SET,ads,⛔️ 广告域名
+  - RULE-SET,applications,📥 下载软件
+  - RULE-SET,lan,🏠 私有网络
+  - RULE-SET,networktest,📈 网络测试
+  - RULE-SET,microsoft-cn,Ⓜ️ Microsoft 中国
+  - RULE-SET,apple-cn,🍎 Apple 中国
+  - RULE-SET,google-cn,🗽 Google 中国
+  - RULE-SET,games-cn,🎮 国区游戏
+  - RULE-SET,proxy,🪜 代理域名
+  - RULE-SET,cn,⚡ 直连域名
+  - RULE-SET,telegramcidr,✈️ Telegram IP
+  - RULE-SET,lancidr,🏠 私有网络
+  - RULE-SET,cncidr,🇨🇳 国内 IP
+  - MATCH,🐟 漏网之鱼
+```
+② 每天早上 3 点（北京时间）自动构建生成 networktest.yaml、google-cn.yaml 和 user.yaml  
+③ `RULE-SET:ads` 源采用 [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
+④ `RULE-SET:applications` 源采用 [Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules)  
+⑤ `RULE-SET:lan` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（域名部分）  
+⑥ `RULE-SET:networktest` 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-ruleset/blob/main/rule-files/network.yaml)组合  
+⑦ `RULE-SET:microsoft-cn` 源采用 [rules.kr328.app/microsoft@cn](https://rules.kr328.app/microsoft@cn.yaml)  
+⑧ `RULE-SET:apple-cn` 源采用 [rules.kr328.app/apple@cn](https://rules.kr328.app/apple@cn.yaml)  
+⑨ `RULE-SET:google-cn` 源采用 [rules.kr328.app/google@cn](https://rules.kr328.app/google@cn.yaml)（删除 `'+.googleapis.cn'`，以免直连时出现 [Google Play Store](https://play.google.com/store) 无法下载或升级应用的问题）  
+⑩ `RULE-SET:games-cn` 源采用 [rules.kr328.app/category-games@cn](https://rules.kr328.app/category-games@cn.yaml)  
+⑪ `RULE-SET:proxy` 源采用 [blackmatrix7/ios_rule_script/Proxy](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy)  
+⑫ `RULE-SET:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)  
+⑬ `RULE-SET:telegramcidr` 源采用 [Telegram IP](https://core.telegram.org/resources/cidr.txt)  
+⑭ `RULE-SET:lancidr` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）  
+⑮ `RULE-SET,cncidr` 源采用 [blackmatrix7/ios_rule_script/ChinaMax](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)（ChinaMax_IP.txt）、[17mon/china_ip_list](https://github.com/17mon/china_ip_list) 和 [gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 组合
+## 2. user.yaml  
 ① 添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellClash/blob/master/public/fake_ip_filter.list)到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，提高兼容性  
 ② 添加 [TrackersList](https://trackerslist.com) 到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)无法连接 TrackersList UDP 协议<img src="https://user-images.githubusercontent.com/45238096/224113233-4d76dec2-495c-4790-a00e-538fc1469639.png" width="60%"/>  
 ③ 若想自己生成配置文件 user.yaml，可以 [Fork 本项目](https://github.com/DustinWin/clash-ruleset/fork)后编辑 *.github/workflows/rule-set.yml* 文件内的 `name: Generate xxx-user.yaml` 部分  
@@ -14,18 +43,72 @@
 
 ```
 proxy-groups:
-  - {name: 📈 网络测试, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
+  - {name: 📈 网络测试, type: select, proxies: [🎯 全球直连, 🇭🇰 香港节点, 🇹🇼 台湾节点, 🇯🇵 日本节点, 🇰🇷 韩国节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
+
+  - {name: ⚡ 直连域名, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
+
+  - {name: 🪜 代理域名, type: select, proxies: [🚀 节点选择, 🎯 全球直连]}
+
+  - {name: 🎮 国区游戏, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
+
+  - {name: Ⓜ️ Microsoft 中国, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
 
   - {name: 🗽 Google 中国, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
 
+  - {name: 🍎 Apple 中国, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
+
+  - {name: 📥 下载软件, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
+
+  - {name: 🏠 私有网络, type: select, proxies: [🎯 全球直连]}
+
+  - {name: ⛔️ 广告域名, type: select, proxies: [🛑 全球拦截]}
+
   - {name: 🎯 全球直连, type: select, proxies: [DIRECT]}
 
+  - {name: 🛑 全球拦截, type: select, proxies: [REJECT]}
+
+
 rule-providers:
-  networktest:
+  ads:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/ads.yaml"
+    path: ./ruleset/ads.yaml
+    interval: 86400
+
+  applications:
     type: http
     behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/applications.yaml"
+    path: ./ruleset/applications.yaml
+    interval: 86400
+
+  lan:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/lan.yaml"
+    path: ./ruleset/lan.yaml
+    interval: 86400
+
+  networktest:
+    type: http
+    behavior: domain
     url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/networktest.yaml"
     path: ./ruleset/networktest.yaml
+    interval: 86400
+
+  microsoft-cn:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/microsoft-cn.yaml"
+    path: ./ruleset/microsoft-cn.yaml
+    interval: 86400
+
+  apple-cn:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/apple-cn.yaml"
+    path: ./ruleset/apple-cn.yaml
     interval: 86400
 
   google-cn:
@@ -35,9 +118,62 @@ rule-providers:
     path: ./ruleset/google-cn.yaml
     interval: 86400
 
+  games-cn:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/games-cn.yaml"
+    path: ./ruleset/games-cn.yaml
+    interval: 86400
+
+  proxy:
+    type: http
+    behavior: proxy
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/proxy.yaml"
+    path: ./ruleset/lan.yaml
+    interval: 86400
+
+  cn:
+    type: http
+    behavior: proxy
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/cn.yaml"
+    path: ./ruleset/cn.yaml
+    interval: 86400
+
+  telegramcidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/telegramcidr.yaml"
+    path: ./ruleset/telegramcidr.yaml
+    interval: 86400
+
+  lancidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/lancidr.yaml"
+    path: ./ruleset/lancidr.yaml
+    interval: 86400
+
+  cncidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/cncidr.yaml"
+    path: ./ruleset/cncidr.yaml
+    interval: 86400
+
 rules:
+  - RULE-SET,ads,⛔️ 广告域名
+  - RULE-SET,applications,📥 下载软件
+  - RULE-SET,lan,🏠 私有网络
   - RULE-SET,networktest,📈 网络测试
+  - RULE-SET,microsoft-cn,Ⓜ️ Microsoft 中国
+  - RULE-SET,apple-cn,🍎 Apple 中国
   - RULE-SET,google-cn,🗽 Google 中国
+  - RULE-SET,games-cn,🎮 国区游戏
+  - RULE-SET,proxy,🪜 代理域名
+  - RULE-SET,cn,⚡ 直连域名
+  - RULE-SET,telegramcidr,✈️ Telegram IP
+  - RULE-SET,lancidr,🏠 私有网络
+  - RULE-SET,cncidr,🇨🇳 国内 IP
 ```
 # 三、 导入 [Clash Verge](https://github.com/zzzgydi/clash-verge)（Windows 端）
 1. 首次使用可进入 Clash Verge->配置，新建“Merge”类型的配置，完成后点击“保存”，右击新建的 Merge 文件，选择“启用”
@@ -47,92 +183,4 @@ rules:
 taskkill /f /t /im "Clash Verge*"
 taskkill /f /t /im clash-meta*
 curl -o %USERPROFILE%\.config\clash-verge\profiles\{文件名}.yaml -L https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/{DNS 模式}-user.yaml
-```
-# 四、 推荐配置
-- 注：以下只是节选，请酌情套用
-
-```
-rule-providers:
-  reject:
-    type: http
-    behavior: domain
-    url: 'https://cdn.jsdelivr.net/gh/privacy-protection-tools/anti-AD@master/anti-ad-clash.yaml'
-    path: ./ruleset/reject.yaml
-    interval: 86400
-
-  applications:
-    type: http
-    behavior: classical
-    url: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt'
-    path: ./ruleset/applications.yaml
-    interval: 86400
-
-  lan:
-    type: http
-    behavior: classical
-    url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan_No_Resolve.yaml'
-    path: ./ruleset/lan.yaml
-    interval: 86400
-
-  networktest:
-    type: http
-    behavior: classical
-    url: 'https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/networktest.yaml'
-    path: ./ruleset/networktest.yaml
-    interval: 86400
-
-  microsoft-cn:
-    type: http
-    behavior: domain
-    url: 'https://rules.kr328.app/microsoft@cn.yaml'
-    path: ./ruleset/microsoft-cn.yaml
-    interval: 86400
-
-  apple-cn:
-    type: http
-    behavior: domain
-    url: 'https://rules.kr328.app/apple@cn.yaml'
-    path: ./ruleset/apple-cn.yaml
-    interval: 86400
-
-  google-cn:
-    type: http
-    behavior: domain
-    url: 'https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/google-cn.yaml'
-    path: ./ruleset/google-cn.yaml
-    interval: 86400
-
-  games-cn:
-    type: http
-    behavior: domain
-    url: 'https://rules.kr328.app/category-games@cn.yaml'
-    path: ./ruleset/games-cn.yaml
-    interval: 86400
-
-  proxy:
-    type: http
-    behavior: classical
-    url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Proxy/Proxy_Classical.yaml'
-    path: ./ruleset/proxy.yaml
-    interval: 86400
-
-  direct:
-    type: http
-    behavior: classical
-    url: 'https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml'
-    path: ./ruleset/direct.yaml
-    interval: 86400
-
-rules:
-  - RULE-SET,reject,⛔️ 广告域名
-  - RULE-SET,applications,📥 下载软件
-  - RULE-SET,lan,🏠 私有网络
-  - RULE-SET,networktest,📈 网络测试
-  - RULE-SET,microsoft-cn,Ⓜ️ Microsoft 中国
-  - RULE-SET,apple-cn,🍎 Apple 中国
-  - RULE-SET,google-cn,🗽 Google 中国
-  - RULE-SET,games-cn,🎮 国区游戏
-  - RULE-SET,proxy,🪜 代理域名
-  - RULE-SET,direct,⚡ 直连域名
-  - MATCH,🐟 漏网之鱼
 ```
