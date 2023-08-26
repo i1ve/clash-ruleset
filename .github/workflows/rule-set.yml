@@ -78,17 +78,17 @@ jobs:
         run: |
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Domain.yaml | grep -v "#" | sed '/^\s*$/d' > ./publish/cn.yaml
 
-      - name: Generate telegramcidr
+      - name: Generate telegramip
         run: |
-          curl -sSL https://core.telegram.org/resources/cidr.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/telegramcidr.yaml
+          curl -sSL https://core.telegram.org/resources/cidr.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/telegramip.yaml
 
-      - name: Generate lancidr
+      - name: Generate lanip
         run: |
-          curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml | grep "IP-CIDR" | grep -v "#" | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/lancidr.yaml
+          curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml | grep "IP-CIDR" | grep -v "#" | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/lanip.yaml
 
-      - name: Generate cncidr
+      - name: Generate cnip
         run: |
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geoip/release/text/cnip.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/cncidr.yaml
+          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geoip/release/text/cnip.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/cnip.yaml
 
       - name: Generate fake-ip-user.yaml
         env:
