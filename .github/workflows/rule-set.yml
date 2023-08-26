@@ -44,18 +44,20 @@ jobs:
 
       - name: Generate google-cn
         run: |
-          curl -sSL https://rules.kr328.app/google@cn.yaml | grep -v "#" | grep -v 'googleapis\.cn' | sed '/^- "/s/^/  /' | sed '/^\s*$/d' > ./publish/google-cn.yaml
+          curl -sSL https://rules.kr328.app/google@cn.yaml | grep -v "#" | grep -v 'googleapis\.cn' | sed 's/- "/  - \x27/g' | sed 's/"$/\x27/' | sed '/^\s*$/d' > ./publish/google-cn.yaml
 
       - name: Generate telegramcidr
         run: |
           curl -sSL https://core.telegram.org/resources/cidr.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/telegramcidr.yaml
 
       - name: Generate cncidr
+        env:
+          SED: sed "s/^/  - '/" | sed "s/\$/'/" | sed '/^\s*$/d'
         run: |
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_IP.yaml | grep -v "#" | grep -v "payload:" | sed '/^\s*$/d' > ./tmp/temp-cncidr1.yaml
-          curl -sSL https://raw.githubusercontent.com/17mon/china_ip_list/master/china_ip_list.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '/^\s*$/d' >> ./tmp/temp-cncidr1.yaml
-          curl -sSL https://raw.githubusercontent.com/gaoyifan/china-operator-ip/ip-lists/china.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '/^\s*$/d' >> ./tmp/temp-cncidr1.yaml
-          curl -sSL https://raw.githubusercontent.com/gaoyifan/china-operator-ip/ip-lists/china6.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '/^\s*$/d' >> ./tmp/temp-cncidr1.yaml
+          curl -sSL https://raw.githubusercontent.com/17mon/china_ip_list/master/china_ip_list.txt | ${{ env.SED }} >> ./tmp/temp-cncidr1.yaml
+          curl -sSL https://raw.githubusercontent.com/gaoyifan/china-operator-ip/ip-lists/china.txt | ${{ env.SED }} >> ./tmp/temp-cncidr1.yaml
+          curl -sSL https://raw.githubusercontent.com/gaoyifan/china-operator-ip/ip-lists/china6.txt | ${{ env.SED }} >> ./tmp/temp-cncidr1.yaml
           awk '!seen[$0]++' ./tmp/temp-cncidr1.yaml | sort > ./tmp/temp-cncidr2.yaml
           sed '1s/^/payload:\n/' ./tmp/temp-cncidr2.yaml > ./publish/cncidr.yaml
 
