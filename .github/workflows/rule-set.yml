@@ -56,7 +56,8 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/17mon/china_ip_list/master/china_ip_list.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '/^\s*$/d' >> ./tmp/temp-cncidr.yaml
           curl -sSL https://raw.githubusercontent.com/gaoyifan/china-operator-ip/ip-lists/china.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '/^\s*$/d' >> ./tmp/temp-cncidr.yaml
           curl -sSL https://raw.githubusercontent.com/gaoyifan/china-operator-ip/ip-lists/china6.txt | sed "s/^/  - '/" | sed "s/\$/'/" | sed '/^\s*$/d' >> ./tmp/temp-cncidr.yaml
-          awk '!seen[$0]++' ./tmp/temp-cncidr.yaml | sed '1s/^/payload:\n/' | sort > ./publish/cncidr.yaml
+          awk '!seen[$0]++' ./tmp/temp-cncidr.yaml | sort > ./publish/cncidr.yaml
+          sed '1s/^/payload:\n/' ./publish/cncidr.yaml
 
       - name: Generate fake-ip-user.yaml
         env:
