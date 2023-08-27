@@ -137,14 +137,14 @@ rule-providers:
 
   proxy:
     type: http
-    behavior: classical
+    behavior: domain
     url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/proxy.yaml"
     path: ./ruleset/proxy.yaml
     interval: 86400
 
   cn:
     type: http
-    behavior: classical
+    behavior: domain
     url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/cn.yaml"
     path: ./ruleset/cn.yaml
     interval: 86400
