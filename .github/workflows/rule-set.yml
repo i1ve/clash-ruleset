@@ -88,7 +88,7 @@ jobs:
 
       - name: Generate cnip
         run: |
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geoip/release/text/cnip.txt | sed "s/^/  - '/" | sed "s/$/'/g" | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/cnip.yaml
+          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geoip/release/text/cn.txt | sed "s/^/  - '/" | sed "s/$/'/g" | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/cnip.yaml
 
       - name: Generate fake-ip-user.yaml
         env:
