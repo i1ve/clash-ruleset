@@ -17,7 +17,7 @@
   - RULE-SET,lanip,🏠 私有网络
   - RULE-SET,cnip,🇨🇳 国内 IP
 ```
-② 每天早上 3 点（北京时间）自动构建生成 networktest.yaml、google-cn.yaml 和 user.yaml  
+② 每天早上 3 点（北京时间）自动构建生成  
 ③ `RULE-SET:ads` 源采用 [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
 ④ `RULE-SET:applications` 源采用 [Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules)  
 ⑤ `RULE-SET:lan` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（域名部分）  
