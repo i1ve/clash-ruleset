@@ -38,6 +38,7 @@
 
 ③ 添加如下域名，以配合 AdGuardHome 作为下游来下载黑名单：
 ```
+    - 'static.adtidy.org'
     - 'adguardteam.github.io'
     - 'anti-ad.net'
 ```
