@@ -36,7 +36,7 @@
 ② 添加 [TrackersList](https://trackerslist.com) 到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)无法连接 TrackersList UDP 协议  
 <img src="https://user-images.githubusercontent.com/45238096/224113233-4d76dec2-495c-4790-a00e-538fc1469639.png" width="60%"/>  
 
-③ 添加如下域名，以配合 AdGuardHome 作为下游来下载黑名单：
+③ 添加如下域名，以配合 AdGuardHome 作为下游来下载黑名单并解决右下角报错“检查更新失败”的问题：
 ```
     - 'static.adtidy.org'
     - 'adguardteam.github.io'
