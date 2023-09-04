@@ -14,6 +14,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Set variables
+        run: |
+          echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+          echo "ads=https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-clash.yaml" >> $GITHUB_ENV
+          echo "lan=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/private" >> $GITHUB_ENV
+          echo "networktest=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest.yaml" >> $GITHUB_ENV
+          echo "microsoft_cn=https://rules.kr328.app/microsoft@cn.yaml" >> $GITHUB_ENV
+          echo "apple_cn=https://rules.kr328.app/apple@cn.yaml" >> $GITHUB_ENV
+          echo "google_cn=https://rules.kr328.app/google@cn.yaml" >> $GITHUB_ENV
+          echo "games_cn1=https://rules.kr328.app/category-games@cn.yaml" >> $GITHUB_ENV
+          echo "games_cn2=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.yaml" >> $GITHUB_ENV
+          echo "proxy=https://raw.githubusercontent.com/Loyalsoldier/domain-list-custom/release/geolocation-!cn.txt" >> $GITHUB_ENV
+          echo "cn=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Domain.yaml" >> $GITHUB_ENV
+        shell: bash
+
       - name: Checkout codebase
         uses: actions/checkout@v3
 
@@ -24,34 +39,55 @@ jobs:
           delete_release: true
           repo: DustinWin/clash-ruleset
 
-      - name: Set variables
+      - name: Generate ads
         run: |
-          echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+          mkdir -p ./tmp ./publish
+          curl -sSL ${ads} > ./publish/ads.yaml
 
-      - name: Generate rule-set
+      - name: Generate lan
         run: |
-          mkdir -p ./tmp
-          mkdir -p ./publish
-          curl -sSL https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-clash.yaml | grep -v "#" | sed '/^\s*$/d' > ./publish/ads.yaml
-          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/applications.txt | sed '/^\s*$/d' > ./publish/applications.yaml
-          curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml | grep "DOMAIN" | grep -v "#" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/DOMAIN,/'/g" | sed "s/$/'/" | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/lan.yaml
-          curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest.yaml | grep -v "#" | sed '/^\s*$/d' > ./tmp/temp-networktest.txt
-          cat <<EOF >> ./tmp/temp-networktest.txt
+          curl -sSL ${lan} | grep -Ev '#|regexp:' | sed '/^\s*$/d' | sed '/^full:/!s/^/  - '\'+.'/g' | sed "s/^full:/  - '/g" | sed "s/$/'/g" | sed '1s/^/payload:\n/' > ./publish/lan.yaml
+
+      - name: Generate networktest
+        run: |
+          curl -sSL ${networktest} | grep -v '#' > ./publish/networktest.yaml
+          cat <<EOF >> ./publish/networktest.yaml
             - DOMAIN-KEYWORD,test-ipv6
             - DOMAIN-KEYWORD,testipv6
             - DOMAIN-KEYWORD,ipv6-test
             - DOMAIN-KEYWORD,ipv6test
           EOF
-          cat ./tmp/temp-networktest.txt > ./publish/networktest.yaml
-          curl -sSL https://rules.kr328.app/microsoft@cn.yaml | grep -v "#" | sed 's/^-/  -/' | sed 's/"/'\''/g' | sed '/^\s*$/d' > ./publish/microsoft-cn.yaml
-          curl -sSL https://rules.kr328.app/apple@cn.yaml | grep -v "#" | sed 's/^-/  -/' | sed 's/"/'\''/g' | sed '/^\s*$/d' > ./publish/apple-cn.yaml
-          curl -sSL https://rules.kr328.app/google@cn.yaml | grep -v "#" | grep -v 'googleapis\.cn' | sed 's/^-/  -/' | sed 's/"/'\''/g' | sed '/^\s*$/d' > ./publish/google-cn.yaml
-          curl -sSL https://rules.kr328.app/category-games@cn.yaml | grep -v "#" | sed 's/^-/  -/' | sed 's/"/'\''/g' | sed '/^\s*$/d' > ./publish/games-cn.yaml
-          curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy_Domain.yaml | grep -v "#" | sed '/^\s*$/d' > ./publish/proxy.yaml
-          curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Domain.yaml | grep -v "google" | grep -v "#" | sed '/^\s*$/d' > ./publish/cn.yaml
-          curl -sSL https://core.telegram.org/resources/cidr.txt | sed "s/^/  - '/" | sed "s/$/'/g" | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/telegramip.yaml
-          curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml | grep "IP-CIDR" | grep -v "#" | sed "s/IP-CIDR6,/'/g" | sed "s/IP-CIDR,/'/g" | sed "s/$/'/" | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/lanip.yaml
-          curl -sSL https://raw.githubusercontent.com/DustinWin/clash-geoip/release/text/cn.txt | sed "s/^/  - '/" | sed "s/$/'/g" | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/cnip.yaml
+
+      - name: Generate microsoft-cn
+        run: |
+          curl -sSL ${microsoft_cn} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/microsoft-cn.yaml
+
+      - name: Generate apple-cn
+        run: |
+          curl -sSL ${apple_cn} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/apple-cn.yaml
+
+      - name: Generate google-cn
+        run: |
+          curl -sSL ${google_cn} | grep -Ev '#|payload:|googleapis\.cn' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/google-cn.yaml
+
+      - name: Generate games-cn
+        run: |
+          curl -sSL ${games_cn1} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '/^\s*$/d' > ./tmp/temp-games-cn.yaml
+          curl -sSL ${games_cn2} | grep 'DOMAIN' | grep -Ev '#|DOMAIN-KEYWORD' | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/DOMAIN,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./tmp/temp-games-cn.yaml
+          sort --ignore-case -u ./tmp/temp-games-cn.yaml > ./tmp/games-cn.yaml
+          echo "payload:" | cat - ./tmp/games-cn.yaml > ./publish/games-cn.yaml
+
+      - name: Generate proxy
+        run: |
+          cat <<EOF > ./publish/proxy.yaml
+          payload:
+            - '+.googleapis.cn'
+          EOF
+          curl -sSL ${proxy} | grep -Ev '#|regexp:' | sed "s/^domain:/  - '+./g" | sed "s/^full:/  - '/g" | sed 's/:@!cn$//g' | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/proxy.yaml
+
+      - name: Generate cn
+        run: |
+          curl -sSL ${cn} | grep -Ev '#|google' > ./publish/cn.yaml
 
       - name: Generate fake-ip-user.yaml
         env:
@@ -68,7 +104,7 @@ jobs:
             enhanced-mode: fake-ip
             fake-ip-filter:
           EOF
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | grep -v "#" | sed "s/.*/'&'/" | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | grep -v '#' | sed "s/.*/'&'/" | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
           curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
           cat <<EOF >> ./tmp/temp-fake-ip-user.txt
               - 'static.adtidy.org'
