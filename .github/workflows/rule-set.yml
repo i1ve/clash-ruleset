@@ -81,7 +81,7 @@ jobs:
 
       - name: Generate google-cn
         run: |
-          curl -sSL ${google_cn} | grep -Ev '#|payload:|googleapis\.cn' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/google-cn.yaml
+          curl -sSL ${google_cn} | grep -Ev '#|payload:|googleapis' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '1s/^/payload:\n/' | sed '/^\s*$/d' > ./publish/google-cn.yaml
 
       - name: Generate games-cn
         run: |
