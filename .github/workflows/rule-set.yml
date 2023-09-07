@@ -103,7 +103,7 @@ jobs:
           sed "s/^/  - '+./g" ../tmp/temp-proxy1.yaml | sed "s/$/'/g" | sed '/^\s*$/d' > ../tmp/temp-proxy2.yaml
           curl -sSL ${proxy} | grep -Ev '#|payload:' >> ../tmp/temp-proxy2.yaml
           echo 'payload:' > ../publish/proxy.yaml
-          sort --ignore-case -u ../tmp/temp-proxy2.yaml >> ./publish/proxy.yaml
+          sort --ignore-case -u ../tmp/temp-proxy2.yaml >> ../publish/proxy.yaml
 
       - name: Generate cn
         run: |
