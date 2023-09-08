@@ -142,7 +142,6 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | grep -v '#' | sed "s/.*/'&'/g" | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
           curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
           cat <<EOF >> ./tmp/temp-fake-ip-user.txt
-              - 'static.adtidy.org'
               - 'adguardteam.github.io'
               - 'anti-ad.net'
             default-nameserver:
