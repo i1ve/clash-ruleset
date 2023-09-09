@@ -128,7 +128,7 @@ jobs:
         env:
           SED: sed 's/^/    - /g' | sed '/^\s*$/d'
         run: |
-          cat <<EOF > ./tmp/temp-fake-ip-user.txt
+          cat <<EOF > ./publish/fake-ip-user.yaml
           dns:
             enable: true
             prefer-h3: true
@@ -139,9 +139,9 @@ jobs:
             enhanced-mode: fake-ip
             fake-ip-filter:
           EOF
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | grep -v '#' | sed "s/.*/'&'/g" | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
-          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | ${{ env.SED }} >> ./tmp/temp-fake-ip-user.txt
-          cat <<EOF >> ./tmp/temp-fake-ip-user.txt
+          curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | grep -v '#' | sed "s/.*/'&'/g" | ${{ env.SED }} >> ./publish/fake-ip-user.yaml
+          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | ${{ env.SED }} >> ./publish/fake-ip-user.yaml
+          cat <<EOF >> ./publish/fake-ip-user.yaml
               - 'adguardteam.github.io'
               - 'anti-ad.net'
             default-nameserver:
@@ -151,8 +151,6 @@ jobs:
               - https://dns.alidns.com/dns-query
               - https://doh.pub/dns-query
           EOF
-          cat ./tmp/temp-fake-ip-user.txt > ./publish/fake-ip-user.yaml
-          rm -f ./tmp/temp-fake-ip-user.txt
 
       - name: Generate redir-host-user.yaml
         run: |
@@ -179,11 +177,7 @@ jobs:
               'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
               'rule-set:cn,lan': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
           EOF
-
-      - name: Move files
-        run: |
           rm -rf ./tmp
-          cd ./publish || exit 1
 
       - name: Release and upload assets
         uses: svenstaro/upload-release-action@v2
