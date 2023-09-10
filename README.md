@@ -112,7 +112,6 @@ proxy-groups:
 
   - {name: 🛑 全球拦截, type: select, proxies: [REJECT]}
 
-
 rule-providers:
   ads:
     type: http
