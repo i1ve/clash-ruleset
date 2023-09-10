@@ -11,6 +11,15 @@
   - RULE-SET,apple-cn,🍎 Apple 中国
   - RULE-SET,google-cn,🗽 Google 中国
   - RULE-SET,games-cn,🎮 国区游戏
+  - RULE-SET,netflix,🎥 Netflix
+  - RULE-SET,disney,📽️ Disney+
+  - RULE-SET,max,🎞️ Max
+  - RULE-SET,primevideo,🎬 Prime Video
+  - RULE-SET,appletv,🍎 Apple TV+
+  - RULE-SET,youtube,📹 YouTube
+  - RULE-SET,tiktok,🎵 TikTok
+  - RULE-SET,bilibili,📺 哔哩哔哩
+  - RULE-SET,openai,🤖 人工智能
   - RULE-SET,proxy,🪜 代理域名
   - RULE-SET,cn,⚡ 直连域名
   - RULE-SET,telegramip,✈️ Telegram IP
@@ -23,14 +32,23 @@
 ⑤ `RULE-SET:lan` 源采用 [v2fly/domain-list-community/private](https://github.com/v2fly/domain-list-community/blob/master/data/private)  
 ⑥ `RULE-SET:networktest` 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-ruleset/blob/main/rule-files/network.yaml)组合  
 ⑦ `RULE-SET:microsoft-cn` 源采用 [rules.kr328.app/microsoft@cn](https://rules.kr328.app/microsoft@cn.yaml)  
-⑧ `RULE-SET:apple-cn` 源采用 [rules.kr328.app/apple@cn](https://rules.kr328.app/apple@cn.yaml)  
-⑨ `RULE-SET:google-cn` 源采用 [rules.kr328.app/google@cn](https://rules.kr328.app/google@cn.yaml)（删除 `googleapis` 相关域名，以免直连时出现 [Google Play Store](https://play.google.com/store) 无法下载或升级应用的问题）  
+⑧ `RULE-SET:apple-cn` 源采用 [felixonmars/dnsmasq-china-list/apple.china.conf](https://github.com/felixonmars/dnsmasq-china-list)  
+⑨ `RULE-SET:google-cn` 源采用 [felixonmars/dnsmasq-china-list/google.china.conf](https://github.com/felixonmars/dnsmasq-china-list) 
 ⑩ `RULE-SET:games-cn` 源采用 [rules.kr328.app/category-games@cn](https://rules.kr328.app/category-games@cn.yaml)和 [blackmatrix7/ios_rule_script/SteamCN](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/SteamCN) 组合  
-⑪ `RULE-SET:proxy` 源采用 [cokebar/gfwlist2dnsmasq](https://github.com/cokebar/gfwlist2dnsmasq) 生成的 [gfwlist](https://github.com/gfwlist/gfwlist) 和 [blackmatrix7/ios_rule_script/Proxy/Proxy_Domain.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy) 组合  
-⑫ `RULE-SET:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax/ChinaMax_Domain.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)  
-⑬ `RULE-SET:telegramip` 源采用 [Telegram IP](https://core.telegram.org/resources/cidr.txt)  
-⑭ `RULE-SET:lanip` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）  
-⑮ `RULE-SET,cnip` 来源 [DustinWin/clash-geoip](https://github.com/DustinWin/clash-geoip)（其源采用 [blackmatrix7/ios_rule_script/ChinaMax/ChinaMax_IP.txt](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)、[17mon/china_ip_list](https://github.com/17mon/china_ip_list) 和 [gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 组合）
+⑩ `RULE-SET:netflix` 源采用 [blackmatrix7/ios_rule_script/Netflix/Netflix_Classical.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Netflix)  
+⑪ `RULE-SET:disney` 源采用 [blackmatrix7/ios_rule_script/Disney](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Disney)  
+⑫ `RULE-SET:max` 源采用 [blackmatrix7/ios_rule_script/HBO](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/HBO)  
+⑬ `RULE-SET:primevideo` 源采用 [blackmatrix7/ios_rule_script/PrimeVideo](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/PrimeVideo)  
+⑭ `RULE-SET:appletv` 源采用 [blackmatrix7/ios_rule_script/AppleTV](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/AppleTV)  
+⑮ `RULE-SET:youtube` 源采用 [blackmatrix7/ios_rule_script/YouTube](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/YouTube)  
+⑯ `RULE-SET:tiktok` 源采用 [blackmatrix7/ios_rule_script/TikTok](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/TikTok)  
+⑰ `RULE-SET:bilibili` 源采用 [blackmatrix7/ios_rule_script/BiliBili](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/BiliBili)  
+⑱ `RULE-SET:openai` 源采用 [blackmatrix7/ios_rule_script/OpenAI](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/OpenAI)  
+⑲ `RULE-SET:proxy` 源采用 [cokebar/gfwlist2dnsmasq](https://github.com/cokebar/gfwlist2dnsmasq) 生成的 [gfwlist](https://github.com/gfwlist/gfwlist) 和 [blackmatrix7/ios_rule_script/Proxy/Proxy_Domain.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy) 组合  
+⑳ `RULE-SET:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax/ChinaMax_Domain.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)  
+㉑ `RULE-SET:telegramip` 源采用 [Telegram IP](https://core.telegram.org/resources/cidr.txt)  
+㉒ `RULE-SET:lanip` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）  
+㉓ `RULE-SET,cnip` 来源 [DustinWin/clash-geoip](https://github.com/DustinWin/clash-geoip)（其源采用 [blackmatrix7/ios_rule_script/ChinaMax/ChinaMax_IP.txt](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)、[17mon/china_ip_list](https://github.com/17mon/china_ip_list) 和 [gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 组合）
 ## 2. user.yaml  
 ① 添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellClash/blob/master/public/fake_ip_filter.list)到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，提高兼容性  
 ② 添加 [TrackersList](https://trackerslist.com) 到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)无法连接 TrackersList UDP 协议  
@@ -134,6 +152,62 @@ rule-providers:
     path: ./ruleset/games-cn.yaml
     interval: 86400
 
+  netflix:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/netflix.yaml"
+    path: ./ruleset/netflix.yaml
+    interval: 86400
+
+  disney:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/disney.yaml"
+    path: ./ruleset/disney.yaml
+    interval: 86400
+
+  max:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/primevideo.yaml"
+    path: ./ruleset/primevideo.yaml
+    interval: 86400
+
+  appletv:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/appletv.yaml"
+    path: ./ruleset/appletv.yaml
+    interval: 86400
+
+  youtube:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/youtube.yaml"
+    path: ./ruleset/youtube.yaml
+    interval: 86400
+
+  tiktok:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/tiktok.yaml"
+    path: ./ruleset/tiktok.yaml
+    interval: 86400
+
+  bilibili:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/bilibili.yaml"
+    path: ./ruleset/bilibili.yaml
+    interval: 86400
+
+  openai:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/openai.yaml"
+    path: ./ruleset/openai.yaml
+    interval: 86400
+
   proxy:
     type: http
     behavior: domain
@@ -178,6 +252,15 @@ rules:
   - RULE-SET,apple-cn,🍎 Apple 中国
   - RULE-SET,google-cn,🗽 Google 中国
   - RULE-SET,games-cn,🎮 国区游戏
+  - RULE-SET,netflix,🎥 Netflix
+  - RULE-SET,disney,📽️ Disney+
+  - RULE-SET,max,🎞️ Max
+  - RULE-SET,primevideo,🎬 Prime Video
+  - RULE-SET,appletv,🍎 Apple TV+
+  - RULE-SET,youtube,📹 YouTube
+  - RULE-SET,tiktok,🎵 TikTok
+  - RULE-SET,bilibili,📺 哔哩哔哩
+  - RULE-SET,openai,🤖 人工智能
   - RULE-SET,proxy,🪜 代理域名
   - RULE-SET,cn,⚡ 直连域名
   - RULE-SET,telegramip,✈️ Telegram IP
