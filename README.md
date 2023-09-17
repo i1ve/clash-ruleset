@@ -186,6 +186,13 @@ rule-providers:
   max:
     type: http
     behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/max.yaml"
+    path: ./ruleset/max.yaml
+    interval: 86400
+
+  primevideo:
+    type: http
+    behavior: domain
     url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/primevideo.yaml"
     path: ./ruleset/primevideo.yaml
     interval: 86400
