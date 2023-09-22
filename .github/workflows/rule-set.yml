@@ -167,7 +167,7 @@ jobs:
       - name: Generate telegramip
         run: |
           echo 'payload:' > ./publish/telegramip.yaml
-          curl -sSL ${telegram} | sed "s/^/  - '/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/telegramip.yaml
+          curl -sSL ${telegramip} | sed "s/^/  - '/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/telegramip.yaml
 
       - name: Generate privateip
         run: |
