@@ -5,7 +5,7 @@
 ```
   - RULE-SET,ads,⛔️ 广告域名
   - RULE-SET,applications,📥 下载软件
-  - RULE-SET,lan,🏠 私有网络
+  - RULE-SET,private,🏠 私有网络
   - RULE-SET,networktest,📈 网络测试
   - RULE-SET,microsoft-cn,Ⓜ️ Microsoft 中国
   - RULE-SET,apple-cn,🍎 Apple 中国
@@ -22,14 +22,13 @@
   - RULE-SET,openai,🤖 人工智能
   - RULE-SET,proxy,🪜 代理域名
   - RULE-SET,cn,⚡ 直连域名
-  - RULE-SET,telegramip,✈️ Telegram IP
-  - RULE-SET,lanip,🏠 私有网络
+  - RULE-SET,telegram,✈️ Telegram
   - RULE-SET,cnip,🇨🇳 国内 IP
 ```
 ② 每天早上 3 点（北京时间）自动构建生成  
 ③ `RULE-SET:ads` 源采用 [privacy-protection-tools/anti-AD/anti-ad-clash.yaml](https://github.com/privacy-protection-tools/anti-AD)  
 ④ `RULE-SET:applications` 源采用 [Loyalsoldier/clash-rules/applications.txt](https://github.com/Loyalsoldier/clash-rules/tree/release)  
-⑤ `RULE-SET:lan` 源采用 [rules.kr328.app/private](https://rules.kr328.app/private.yaml)  
+⑤ `RULE-SET:private` 源采用 [rules.kr328.app/private](https://rules.kr328.app/private.yaml) 和 [blackmatrix7/ios_rule_script/Lan/Lan.list](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan) 组合  
 ⑥ `RULE-SET:networktest` 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-ruleset/blob/main/rule-files/network.yaml)组合  
 ⑦ `RULE-SET:microsoft-cn` 源采用 [rules.kr328.app/microsoft@cn](https://rules.kr328.app/microsoft@cn.yaml)  
 ⑧ `RULE-SET:apple-cn` 源采用 [felixonmars/dnsmasq-china-list/apple.china.conf](https://github.com/felixonmars/dnsmasq-china-list)  
@@ -45,10 +44,9 @@
 ⑱ `RULE-SET:bilibili` 源采用 [blackmatrix7/ios_rule_script/BiliBili](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/BiliBili)  
 ⑲ `RULE-SET:openai` 源采用 [blackmatrix7/ios_rule_script/OpenAI](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/OpenAI)  
 ⑳ `RULE-SET:proxy` 源采用 [cokebar/gfwlist2dnsmasq](https://github.com/cokebar/gfwlist2dnsmasq) 生成的 [gfwlist](https://github.com/gfwlist/gfwlist) 和 [blackmatrix7/ios_rule_script/Proxy/Proxy_Domain.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy) 组合  
-㉑ `RULE-SET:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax/ChinaMax_Domain.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)  
-㉒ `RULE-SET:telegramip` 源采用 [Telegram IP](https://core.telegram.org/resources/cidr.txt)  
-㉓ `RULE-SET:lanip` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）  
-㉔ `RULE-SET,cnip` 来源 [DustinWin/clash-geoip](https://github.com/DustinWin/clash-geoip)（其源采用 [blackmatrix7/ios_rule_script/ChinaMax/ChinaMax_IP.txt](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)、[17mon/china_ip_list](https://github.com/17mon/china_ip_list) 和 [gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 组合）
+㉑ `RULE-SET:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax/ChinaMax_Domain.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax) 并删除 Microsoft、Apple 和 Google 相关域名  
+㉒ `RULE-SET:telegram` 源采用 [Telegram IP](https://core.telegram.org/resources/cidr.txt)    
+㉓ `RULE-SET,cnip` 来源 [DustinWin/clash-geoip](https://github.com/DustinWin/clash-geoip)（其源采用 [blackmatrix7/ios_rule_script/ChinaMax/ChinaMax_IP.txt](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)、[17mon/china_ip_list](https://github.com/17mon/china_ip_list) 和 [gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 组合
 ## 2. user.yaml  
 ① 添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellClash/blob/master/public/fake_ip_filter.list)到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，提高兼容性  
 ② 添加 [TrackersList](https://trackerslist.com) 到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)无法连接 TrackersList UDP 协议  
@@ -127,11 +125,11 @@ rule-providers:
     path: ./ruleset/applications.yaml
     interval: 86400
 
-  lan:
+  private:
     type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/lan.yaml"
-    path: ./ruleset/lan.yaml
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/private.yaml"
+    path: ./ruleset/private.yaml
     interval: 86400
 
   networktest:
@@ -246,18 +244,11 @@ rule-providers:
     path: ./ruleset/cn.yaml
     interval: 86400
 
-  telegramip:
+  telegram:
     type: http
     behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/telegramip.yaml"
-    path: ./ruleset/telegramip.yaml
-    interval: 86400
-
-  lanip:
-    type: http
-    behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/lanip.yaml"
-    path: ./ruleset/lanip.yaml
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/telegram.yaml"
+    path: ./ruleset/telegram.yaml
     interval: 86400
 
   cnip:
@@ -270,7 +261,7 @@ rule-providers:
 rules:
   - RULE-SET,ads,⛔️ 广告域名
   - RULE-SET,applications,📥 下载软件
-  - RULE-SET,lan,🏠 私有网络
+  - RULE-SET,private,🏠 私有网络
   - RULE-SET,networktest,📈 网络测试
   - RULE-SET,microsoft-cn,Ⓜ️ Microsoft 中国
   - RULE-SET,apple-cn,🍎 Apple 中国
@@ -287,8 +278,7 @@ rules:
   - RULE-SET,openai,🤖 人工智能
   - RULE-SET,proxy,🪜 代理域名
   - RULE-SET,cn,⚡ 直连域名
-  - RULE-SET,telegramip,✈️ Telegram IP
-  - RULE-SET,lanip,🏠 私有网络
+  - RULE-SET,telegram,✈️ Telegram
   - RULE-SET,cnip,🇨🇳 国内 IP
 ```
 # 三、 导入 [Clash Verge](https://github.com/zzzgydi/clash-verge)（Windows 端）
