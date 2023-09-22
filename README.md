@@ -23,6 +23,7 @@
   - RULE-SET,proxy,🪜 代理域名
   - RULE-SET,cn,⚡ 直连域名
   - RULE-SET,telegram,✈️ Telegram
+  - RULE-SET,privateip,🏠 私有网络
   - RULE-SET,cnip,🇨🇳 国内 IP
 ```
 ② 每天早上 3 点（北京时间）自动构建生成  
@@ -45,8 +46,9 @@
 ⑲ `RULE-SET:openai` 源采用 [blackmatrix7/ios_rule_script/OpenAI](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/OpenAI)  
 ⑳ `RULE-SET:proxy` 源采用 [cokebar/gfwlist2dnsmasq](https://github.com/cokebar/gfwlist2dnsmasq) 生成的 [gfwlist](https://github.com/gfwlist/gfwlist) 和 [blackmatrix7/ios_rule_script/Proxy/Proxy_Domain.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy) 组合  
 ㉑ `RULE-SET:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax/ChinaMax_Domain.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax) 并删除 Microsoft、Apple 和 Google 相关域名  
-㉒ `RULE-SET:telegram` 源采用 [Telegram IP](https://core.telegram.org/resources/cidr.txt)    
-㉓ `RULE-SET,cnip` 来源 [DustinWin/clash-geoip](https://github.com/DustinWin/clash-geoip)（其源采用 [blackmatrix7/ios_rule_script/ChinaMax/ChinaMax_IP.txt](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)、[17mon/china_ip_list](https://github.com/17mon/china_ip_list) 和 [gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 组合
+㉒ `RULE-SET:telegram` 源采用 [Telegram IP](https://core.telegram.org/resources/cidr.txt)  
+㉓ `RULE-SET:privateip` 源采用 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan)（IP 部分）  
+㉔ `RULE-SET,cnip` 来源 [DustinWin/clash-geoip](https://github.com/DustinWin/clash-geoip)（其源采用 [blackmatrix7/ios_rule_script/ChinaMax/ChinaMax_IP.txt](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)、[17mon/china_ip_list](https://github.com/17mon/china_ip_list) 和 [gaoyifan/china-operator-ip](https://github.com/gaoyifan/china-operator-ip) 组合
 ## 2. user.yaml  
 ① 添加[常用 fake-ip 地址过滤列表](https://github.com/juewuy/ShellClash/blob/master/public/fake_ip_filter.list)到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，提高兼容性  
 ② 添加 [TrackersList](https://trackerslist.com) 到 fake-ip-user.yaml 内的 `fake-ip-filter` 中，防止 [BT 下载](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)无法连接 TrackersList UDP 协议  
