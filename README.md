@@ -288,7 +288,7 @@ rules:
   - RULE-SET,proxy,🪜 代理域名
   - RULE-SET,cn,⚡ 直连域名
   - RULE-SET,telegramip,✈️ Telegram
-  - RULE-SET,privateip,🏠 私有网络
+  - RULE-SET,privateip,🏠 私有网络,no-resolve
   - RULE-SET,cnip,🇨🇳 国内 IP
 ```
 # 三、 导入 [Clash Verge](https://github.com/zzzgydi/clash-verge)（Windows 端）
