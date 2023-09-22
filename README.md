@@ -98,7 +98,7 @@ proxy-groups:
 
   - {name: 🇨🇳 国内 IP, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
 
-  - {name: ✈️ Telegram IP, type: select, proxies: [🚀 节点选择]}
+  - {name: ✈️ Telegram, type: select, proxies: [🚀 节点选择]}
 
   - {name: 📥 下载软件, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
 
