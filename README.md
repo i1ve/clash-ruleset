@@ -129,7 +129,7 @@ rule-providers:
 
   private:
     type: http
-    behavior: classical
+    behavior: domain
     url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/private.yaml"
     path: ./ruleset/private.yaml
     interval: 86400
@@ -253,6 +253,13 @@ rule-providers:
     path: ./ruleset/telegram.yaml
     interval: 86400
 
+  privateip:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/privateip.yaml"
+    path: ./ruleset/privateip.yaml
+    interval: 86400
+
   cnip:
     type: http
     behavior: ipcidr
@@ -281,6 +288,7 @@ rules:
   - RULE-SET,proxy,🪜 代理域名
   - RULE-SET,cn,⚡ 直连域名
   - RULE-SET,telegram,✈️ Telegram
+  - RULE-SET,privateip,🏠 私有网络
   - RULE-SET,cnip,🇨🇳 国内 IP
 ```
 # 三、 导入 [Clash Verge](https://github.com/zzzgydi/clash-verge)（Windows 端）
