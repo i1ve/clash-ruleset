@@ -38,7 +38,7 @@ jobs:
           echo "openai=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml" >> $GITHUB_ENV
           echo "cn=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Domain.yaml" >> $GITHUB_ENV
           echo "proxy=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy_Domain.yaml" >> $GITHUB_ENV
-          echo "telegram=https://core.telegram.org/resources/cidr.txt" >> $GITHUB_ENV
+          echo "telegramip=https://core.telegram.org/resources/cidr.txt" >> $GITHUB_ENV
           echo "cnip=https://raw.githubusercontent.com/DustinWin/clash-geoip/release/text/cn.txt" >> $GITHUB_ENV
         shell: bash
 
@@ -164,10 +164,10 @@ jobs:
         run: |
           curl -sSL ${cn} | grep -Ev '#|microsoft|apple|google' > ./publish/cn.yaml
 
-      - name: Generate telegram
+      - name: Generate telegramip
         run: |
-          echo 'payload:' > ./publish/telegram.yaml
-          curl -sSL ${telegram} | sed "s/^/  - '/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/telegram.yaml
+          echo 'payload:' > ./publish/telegramip.yaml
+          curl -sSL ${telegram} | sed "s/^/  - '/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/telegramip.yaml
 
       - name: Generate privateip
         run: |
