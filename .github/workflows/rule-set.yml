@@ -70,7 +70,7 @@ jobs:
       - name: Generate private
         run: |
           curl -sSL ${private1} | grep -Ev '#|payload:' | sed 's/^- "+./- DOMAIN-SUFFIX,/g' | sed 's/^- "/- DOMAIN,/g' | sed 's/"$//g' | sed 's/^/  /g' | sed '/^\s*$/d' > ./tmp/temp-private.yaml
-          curl -sSL ${private2} | grep -v '#' | sed 's/^/  /g' | sed '/^\s*$/d' >> ./tmp/temp-private.yaml
+          curl -sSL ${private2} | grep -v '#' | sed 's/^/  - /g' | sed '/^\s*$/d' >> ./tmp/temp-private.yaml
           echo 'payload:' > ./publish/private.yaml
           sort --ignore-case -u ./tmp/temp-private.yaml >> ./publish/private.yaml
 
