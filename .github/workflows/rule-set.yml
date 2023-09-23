@@ -70,7 +70,7 @@ jobs:
       - name: Generate private
         run: |
           curl -sSL ${private1} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '/^\s*$/d' > ./tmp/temp-private.yaml
-          curl -sSL ${private2} | grep 'DOMAIN' | grep -Ev '#|DOMAIN-KEYWORD' | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/DOMAIN,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./tmp/temp-private.yaml
+          curl -sSL ${private2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./tmp/temp-private.yaml
           echo 'payload:' > ./publish/private.yaml
           sort --ignore-case -u ./tmp/temp-private.yaml >> ./publish/private.yaml
 
@@ -102,7 +102,7 @@ jobs:
       - name: Generate games-cn
         run: |
           curl -sSL ${games_cn1} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '/^\s*$/d' > ./tmp/temp-games-cn.yaml
-          curl -sSL ${games_cn2} | grep 'DOMAIN' | grep -Ev '#|DOMAIN-KEYWORD' | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/DOMAIN,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./tmp/temp-games-cn.yaml
+          curl -sSL ${games_cn2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./tmp/temp-games-cn.yaml
           echo 'payload:' > ./publish/games-cn.yaml
           sort --ignore-case -u ./tmp/temp-games-cn.yaml >> ./publish/games-cn.yaml
 
@@ -113,42 +113,42 @@ jobs:
       - name: Generate disney
         run: |
           echo 'payload:' > ./publish/disney.yaml
-          curl -sSL ${disney} | grep 'DOMAIN' | grep -Ev '#|DOMAIN-KEYWORD' | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/DOMAIN,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/disney.yaml
+          curl -sSL ${disney} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/disney.yaml
 
       - name: Generate max
         run: |
           echo 'payload:' > ./publish/max.yaml
-          curl -sSL ${max} | grep 'DOMAIN' | grep -Ev '#|DOMAIN-KEYWORD' | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/DOMAIN,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/max.yaml
+          curl -sSL ${max} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/max.yaml
 
       - name: Generate primevideo
         run: |
           echo 'payload:' > ./publish/primevideo.yaml
-          curl -sSL ${primevideo} | grep 'DOMAIN' | grep -Ev '#|DOMAIN-KEYWORD' | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/DOMAIN,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/primevideo.yaml
+          curl -sSL ${primevideo} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/primevideo.yaml
 
       - name: Generate appletv
         run: |
           echo 'payload:' > ./publish/appletv.yaml
-          curl -sSL ${appletv} | grep 'DOMAIN' | grep -Ev '#|DOMAIN-KEYWORD' | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/DOMAIN,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/appletv.yaml
+          curl -sSL ${appletv} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/appletv.yaml
 
       - name: Generate youtube
         run: |
           echo 'payload:' > ./publish/youtube.yaml
-          curl -sSL ${youtube} | grep 'DOMAIN' | grep -Ev '#|DOMAIN-KEYWORD' | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/DOMAIN,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/youtube.yaml
+          curl -sSL ${youtube} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/youtube.yaml
 
       - name: Generate tiktok
         run: |
           echo 'payload:' > ./publish/tiktok.yaml
-          curl -sSL ${tiktok} | grep 'DOMAIN' | grep -Ev '#|DOMAIN-KEYWORD' | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/DOMAIN,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/tiktok.yaml
+          curl -sSL ${tiktok} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/tiktok.yaml
 
       - name: Generate bilibili
         run: |
           echo 'payload:' > ./publish/bilibili.yaml
-          curl -sSL ${bilibili} | grep 'DOMAIN' | grep -Ev '#|DOMAIN-KEYWORD' | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/DOMAIN,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/bilibili.yaml
+          curl -sSL ${bilibili} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/bilibili.yaml
 
       - name: Generate openai
         run: |
           echo 'payload:' > ./publish/openai.yaml
-          curl -sSL ${openai} | grep 'DOMAIN' | grep -Ev '#|DOMAIN-KEYWORD' | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/DOMAIN,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/openai.yaml
+          curl -sSL ${openai} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/openai.yaml
 
       - name: Generate proxy
         run: |
@@ -172,7 +172,7 @@ jobs:
       - name: Generate privateip
         run: |
           echo 'payload:' > ./publish/privateip.yaml
-          curl -sSL ${private2} | grep 'IP-CIDR' | grep -v '#' | sed "s/IP-CIDR6,/'/g" | sed "s/IP-CIDR,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/privateip.yaml
+          curl -sSL ${private2} | grep -v '#' | grep 'IP-CIDR' | sed "s/IP-CIDR,/'/g" | sed "s/IP-CIDR6,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/privateip.yaml
 
       - name: Generate cnip
         run: |
