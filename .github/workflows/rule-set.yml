@@ -162,7 +162,7 @@ jobs:
 
       - name: Generate cn
         run: |
-          curl -sSL ${cn} | grep -Ev '#|microsoft|apple|google' > ./publish/cn.yaml
+          curl -sSL ${cn} | grep -Ev '#|google' > ./publish/cn.yaml
 
       - name: Generate telegramip
         run: |
