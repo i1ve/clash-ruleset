@@ -145,13 +145,15 @@ jobs:
 
       - name: Generate networktest
         run: |
-          curl -sSL ${networktest} | grep -v '#' > ./publish/networktest.yaml
-          cat <<EOF >> ./publish/networktest.yaml
+          curl -sSL ${networktest} | grep -Ev '#|payload:' | sed '/^\s*$/d' > ./tmp/temp-networktest.yaml
+          cat <<EOF >> ./tmp/temp-networktest.yaml
             - DOMAIN-KEYWORD,test-ipv6
             - DOMAIN-KEYWORD,testipv6
             - DOMAIN-KEYWORD,ipv6-test
             - DOMAIN-KEYWORD,ipv6test
           EOF
+          echo 'payload:' > ./publish/networktest.yaml
+          sort --ignore-case -u ./tmp/temp-networktest.yaml >> ./publish/networktest.yaml
 
       - name: Generate applications
         run: |
@@ -163,7 +165,7 @@ jobs:
           chmod +x ./gfwlist2dnsmasq.sh
           ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy1.yaml
           sed "s/^/  - '+./g" ../tmp/temp-proxy1.yaml | sed "s/$/'/g" | sed '/^\s*$/d' > ../tmp/temp-proxy2.yaml
-          curl -sSL ${proxy} | grep -Ev '#|payload:' >> ../tmp/temp-proxy2.yaml
+          curl -sSL ${proxy} | grep -Ev '#|payload:' | sed '/^\s*$/d' >> ../tmp/temp-proxy2.yaml
           echo 'payload:' > ../publish/proxy.yaml
           sort --ignore-case -u ../tmp/temp-proxy2.yaml >> ../publish/proxy.yaml
 
