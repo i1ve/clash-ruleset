@@ -1,10 +1,10 @@
-# 特别说明：“🏠 私有网络”和“✈️ Telegram”名称已改！
+# 特别说明：“📥 下载软件”、“🏠 私有网络”和“✈️ Telegram”名称已改！
 # 一、 说明
 ## 1. rule-set 规则
 ① 规则参考 [Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules)，有如下分类：
 ```
   - RULE-SET,ads,⛔️ 广告域名
-  - RULE-SET,applications,📥 下载软件
+  - RULE-SET,download,📥 下载软件
   - RULE-SET,private,🏠 私有网络
   - RULE-SET,networktest,📈 网络测试
   - RULE-SET,microsoft-cn,Ⓜ️ Microsoft 中国
@@ -28,7 +28,7 @@
 ```
 ② 每天早上 3 点（北京时间）自动构建生成  
 ③ `RULE-SET:ads` 源采用 [privacy-protection-tools/anti-AD/anti-ad-clash.yaml](https://github.com/privacy-protection-tools/anti-AD)  
-④ `RULE-SET:applications` 源采用 [Loyalsoldier/clash-rules/applications.txt](https://github.com/Loyalsoldier/clash-rules/tree/release)  
+④ `RULE-SET:download` 源采用 [blackmatrix7/ios_rule_script/PrivateTracker/PrivateTracker.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/PrivateTracker) 和 [Loyalsoldier/clash-rules/applications.txt](https://github.com/Loyalsoldier/clash-rules/tree/release) 组合  
 ⑤ `RULE-SET:private` 源采用 [rules.kr328.app/private](https://rules.kr328.app/private.yaml) 和 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan) 组合  
 ⑥ `RULE-SET:networktest` 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-ruleset/blob/main/rule-files/network.yaml)组合  
 ⑦ `RULE-SET:microsoft-cn` 源采用 [rules.kr328.app/microsoft@cn](https://rules.kr328.app/microsoft@cn.yaml)  
@@ -120,11 +120,11 @@ rule-providers:
     path: ./ruleset/ads.yaml
     interval: 86400
 
-  applications:
+  download:
     type: http
     behavior: classical
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/applications.yaml"
-    path: ./ruleset/applications.yaml
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/download.yaml"
+    path: ./ruleset/download.yaml
     interval: 86400
 
   private:
@@ -269,7 +269,7 @@ rule-providers:
 
 rules:
   - RULE-SET,ads,⛔️ 广告域名
-  - RULE-SET,applications,📥 下载软件
+  - RULE-SET,download,📥 下载软件
   - RULE-SET,private,🏠 私有网络
   - RULE-SET,networktest,📈 网络测试
   - RULE-SET,microsoft-cn,Ⓜ️ Microsoft 中国
