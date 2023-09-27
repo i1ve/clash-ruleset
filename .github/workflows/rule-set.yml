@@ -64,7 +64,7 @@ jobs:
           mkdir -p ./tmp ./publish
           curl -sSL ${ads} | grep -v '#' | sed '/^\s*$/d' > ./publish/ads.yaml
 
-      - name: Generate applications
+      - name: Generate download
         run: |
           curl -sSL ${download1} | grep -Ev '#|payload:' | sed '/^\s*$/d' > ./tmp/temp-download.yaml
           curl -sSL ${download2} | grep -Ev 'payload:' | sed '/^\s*$/d' >> ./tmp/temp-download.yaml
