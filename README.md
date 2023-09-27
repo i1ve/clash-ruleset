@@ -4,9 +4,7 @@
 ① 规则参考 [Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules)，有如下分类：
 ```
   - RULE-SET,ads,⛔️ 广告域名
-  - RULE-SET,download,📥 下载软件
   - RULE-SET,private,🏠 私有网络
-  - RULE-SET,networktest,📈 网络测试
   - RULE-SET,microsoft-cn,Ⓜ️ Microsoft 中国
   - RULE-SET,apple-cn,🍎 Apple 中国
   - RULE-SET,google-cn,🗽 Google 中国
@@ -20,6 +18,8 @@
   - RULE-SET,tiktok,🎵 TikTok
   - RULE-SET,bilibili,📺 哔哩哔哩
   - RULE-SET,openai,🤖 人工智能
+  - RULE-SET,networktest,📈 网络测试
+  - RULE-SET,download,📥 下载软件
   - RULE-SET,proxy,🪜 代理域名
   - RULE-SET,cn,⚡ 直连域名
   - RULE-SET,telegramip,✈️ Telegram
@@ -27,23 +27,24 @@
   - RULE-SET,cnip,🇨🇳 国内 IP
 ```
 ② 每天早上 3 点（北京时间）自动构建生成  
-③ `RULE-SET:ads` 源采用 [privacy-protection-tools/anti-AD/anti-ad-clash.yaml](https://github.com/privacy-protection-tools/anti-AD)  
-④ `RULE-SET:download` 源采用 [blackmatrix7/ios_rule_script/PrivateTracker/PrivateTracker.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/PrivateTracker) 和 [Loyalsoldier/clash-rules/applications.txt](https://github.com/Loyalsoldier/clash-rules/tree/release) 组合  
-⑤ `RULE-SET:private` 源采用 [rules.kr328.app/private](https://rules.kr328.app/private.yaml) 和 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan) 组合，并添加主流 Clash dashboard 在线面板域名（`clash.razord.top`、`clash.metacubex.one`、`yacd.haishan.me`、`yacd.metacubex.one` 和 `d.metacubex.one`）  
-⑥ `RULE-SET:networktest` 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-ruleset/blob/main/rule-files/network.yaml)组合  
-⑦ `RULE-SET:microsoft-cn` 源采用 [rules.kr328.app/microsoft@cn](https://rules.kr328.app/microsoft@cn.yaml)  
-⑧ `RULE-SET:apple-cn` 源采用 [felixonmars/dnsmasq-china-list/apple.china.conf](https://github.com/felixonmars/dnsmasq-china-list)  
-⑨ `RULE-SET:google-cn` 源采用 [felixonmars/dnsmasq-china-list/google.china.conf](https://github.com/felixonmars/dnsmasq-china-list)  
-⑩ `RULE-SET:games-cn` 源采用 [rules.kr328.app/category-games@cn](https://rules.kr328.app/category-games@cn.yaml) 和 [blackmatrix7/ios_rule_script/SteamCN](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/SteamCN) 组合  
-⑪ `RULE-SET:netflix` 源采用 [blackmatrix7/ios_rule_script/Netflix/Netflix_Classical.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Netflix)  
-⑫ `RULE-SET:disney` 源采用 [blackmatrix7/ios_rule_script/Disney](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Disney)  
-⑬ `RULE-SET:max` 源采用 [blackmatrix7/ios_rule_script/HBO](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/HBO)  
-⑭ `RULE-SET:primevideo` 源采用 [blackmatrix7/ios_rule_script/PrimeVideo](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/PrimeVideo)  
-⑮ `RULE-SET:appletv` 源采用 [blackmatrix7/ios_rule_script/AppleTV](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/AppleTV)  
-⑯ `RULE-SET:youtube` 源采用 [blackmatrix7/ios_rule_script/YouTube](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/YouTube)  
-⑰ `RULE-SET:tiktok` 源采用 [blackmatrix7/ios_rule_script/TikTok](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/TikTok)  
-⑱ `RULE-SET:bilibili` 源采用 [blackmatrix7/ios_rule_script/BiliBili](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/BiliBili)  
-⑲ `RULE-SET:openai` 源采用 [blackmatrix7/ios_rule_script/OpenAI](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/OpenAI)  
+③ `RULE-SET:ads` 源采用 [privacy-protection-tools/anti-AD/anti-ad-clash.yaml](https://github.com/privacy-protection-tools/anti-AD)   
+④ `RULE-SET:private` 源采用 [rules.kr328.app/private](https://rules.kr328.app/private.yaml) 和 [blackmatrix7/ios_rule_script/Lan](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Lan) 组合，并添加主流 Clash dashboard 在线面板域名（`clash.razord.top`、`clash.metacubex.one`、`yacd.haishan.me`、`yacd.metacubex.one` 和 `d.metacubex.one`）  
+ 
+⑤ `RULE-SET:microsoft-cn` 源采用 [rules.kr328.app/microsoft@cn](https://rules.kr328.app/microsoft@cn.yaml)  
+⑥ `RULE-SET:apple-cn` 源采用 [felixonmars/dnsmasq-china-list/apple.china.conf](https://github.com/felixonmars/dnsmasq-china-list)  
+⑦ `RULE-SET:google-cn` 源采用 [felixonmars/dnsmasq-china-list/google.china.conf](https://github.com/felixonmars/dnsmasq-china-list)  
+⑧ `RULE-SET:games-cn` 源采用 [rules.kr328.app/category-games@cn](https://rules.kr328.app/category-games@cn.yaml) 和 [blackmatrix7/ios_rule_script/SteamCN](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/SteamCN) 组合  
+⑨ `RULE-SET:netflix` 源采用 [blackmatrix7/ios_rule_script/Netflix/Netflix_Classical.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Netflix)  
+⑩ `RULE-SET:disney` 源采用 [blackmatrix7/ios_rule_script/Disney](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Disney)  
+⑪ `RULE-SET:max` 源采用 [blackmatrix7/ios_rule_script/HBO](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/HBO)  
+⑫ `RULE-SET:primevideo` 源采用 [blackmatrix7/ios_rule_script/PrimeVideo](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/PrimeVideo)  
+⑬ `RULE-SET:appletv` 源采用 [blackmatrix7/ios_rule_script/AppleTV](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/AppleTV)  
+⑭ `RULE-SET:youtube` 源采用 [blackmatrix7/ios_rule_script/YouTube](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/YouTube)  
+⑮ `RULE-SET:tiktok` 源采用 [blackmatrix7/ios_rule_script/TikTok](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/TikTok)  
+⑯ `RULE-SET:bilibili` 源采用 [blackmatrix7/ios_rule_script/BiliBili](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/BiliBili)  
+⑰ `RULE-SET:openai` 源采用 [blackmatrix7/ios_rule_script/OpenAI](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/OpenAI)  
+⑱ `RULE-SET:networktest` 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-ruleset/blob/main/rule-files/network.yaml)组合  
+⑲ `RULE-SET:download` 源采用 [blackmatrix7/ios_rule_script/PrivateTracker/PrivateTracker.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/PrivateTracker) 和 [Loyalsoldier/clash-rules/applications.txt](https://github.com/Loyalsoldier/clash-rules/tree/release) 组合  
 ⑳ `RULE-SET:proxy` 源采用 [cokebar/gfwlist2dnsmasq](https://github.com/cokebar/gfwlist2dnsmasq) 生成的 [gfwlist](https://github.com/gfwlist/gfwlist) 和 [blackmatrix7/ios_rule_script/Proxy/Proxy_Domain.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy) 组合  
 ㉑ `RULE-SET:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax/ChinaMax_Domain.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)  
 ㉒ `RULE-SET:telegramip` 源采用 [Telegram IP](https://core.telegram.org/resources/cidr.txt)  
@@ -92,6 +93,8 @@ proxy-groups:
 
   - {name: 🤖 人工智能, type: select, proxies: [🚀 节点选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
 
+  - {name: 📥 下载软件, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
+
   - {name: Ⓜ️ Microsoft 中国, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
 
   - {name: 🗽 Google 中国, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
@@ -101,8 +104,6 @@ proxy-groups:
   - {name: 🇨🇳 国内 IP, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
 
   - {name: ✈️ Telegram, type: select, proxies: [🚀 节点选择]}
-
-  - {name: 📥 下载软件, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
 
   - {name: 🏠 私有网络, type: select, proxies: [🎯 全球直连]}
 
@@ -120,25 +121,11 @@ rule-providers:
     path: ./ruleset/ads.yaml
     interval: 86400
 
-  download:
-    type: http
-    behavior: classical
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/download.yaml"
-    path: ./ruleset/download.yaml
-    interval: 86400
-
   private:
     type: http
     behavior: domain
     url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/private.yaml"
     path: ./ruleset/private.yaml
-    interval: 86400
-
-  networktest:
-    type: http
-    behavior: classical
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/networktest.yaml"
-    path: ./ruleset/networktest.yaml
     interval: 86400
 
   microsoft-cn:
@@ -232,6 +219,20 @@ rule-providers:
     path: ./ruleset/openai.yaml
     interval: 86400
 
+  networktest:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/networktest.yaml"
+    path: ./ruleset/networktest.yaml
+    interval: 86400
+
+  download:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/download.yaml"
+    path: ./ruleset/download.yaml
+    interval: 86400
+
   proxy:
     type: http
     behavior: domain
@@ -269,9 +270,7 @@ rule-providers:
 
 rules:
   - RULE-SET,ads,⛔️ 广告域名
-  - RULE-SET,download,📥 下载软件
   - RULE-SET,private,🏠 私有网络
-  - RULE-SET,networktest,📈 网络测试
   - RULE-SET,microsoft-cn,Ⓜ️ Microsoft 中国
   - RULE-SET,apple-cn,🍎 Apple 中国
   - RULE-SET,google-cn,🗽 Google 中国
@@ -285,6 +284,8 @@ rules:
   - RULE-SET,tiktok,🎵 TikTok
   - RULE-SET,bilibili,📺 哔哩哔哩
   - RULE-SET,openai,🤖 人工智能
+  - RULE-SET,networktest,📈 网络测试
+  - RULE-SET,download,📥 下载软件
   - RULE-SET,proxy,🪜 代理域名
   - RULE-SET,cn,⚡ 直连域名
   - RULE-SET,telegramip,✈️ Telegram
