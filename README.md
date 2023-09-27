@@ -19,7 +19,7 @@
   - RULE-SET,bilibili,📺 哔哩哔哩
   - RULE-SET,openai,🤖 人工智能
   - RULE-SET,networktest,📈 网络测试
-  - RULE-SET,download,📥 下载软件
+  - RULE-SET,applications,🖥️ 直连软件
   - RULE-SET,proxy,🪜 代理域名
   - RULE-SET,cn,⚡ 直连域名
   - RULE-SET,telegramip,✈️ Telegram
@@ -43,7 +43,7 @@
 ⑯ `RULE-SET:bilibili` 源采用 [blackmatrix7/ios_rule_script/BiliBili](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/BiliBili)  
 ⑰ `RULE-SET:openai` 源采用 [blackmatrix7/ios_rule_script/OpenAI](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/OpenAI)  
 ⑱ `RULE-SET:networktest` 源采用 [blackmatrix7/ios_rule_script/Speedtest](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Speedtest) 和 [IPv6 测试网站](https://github.com/DustinWin/clash-ruleset/blob/main/rule-files/network.yaml)组合  
-⑲ `RULE-SET:download` 源采用 [blackmatrix7/ios_rule_script/PrivateTracker/PrivateTracker.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/PrivateTracker) 和 [Loyalsoldier/clash-rules/applications.txt](https://github.com/Loyalsoldier/clash-rules/tree/release) 组合  
+⑲ `RULE-SET:applications` 源采用 [Loyalsoldier/clash-rules/applications.txt](https://github.com/Loyalsoldier/clash-rules/tree/release)  
 ⑳ `RULE-SET:proxy` 源采用 [cokebar/gfwlist2dnsmasq](https://github.com/cokebar/gfwlist2dnsmasq) 生成的 [gfwlist](https://github.com/gfwlist/gfwlist) 和 [blackmatrix7/ios_rule_script/Proxy/Proxy_Domain.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/Proxy) 组合  
 ㉑ `RULE-SET:cn` 源采用 [blackmatrix7/ios_rule_script/ChinaMax/ChinaMax_Domain.yaml](https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Clash/ChinaMax)  
 ㉒ `RULE-SET:telegramip` 源采用 [Telegram IP](https://core.telegram.org/resources/cidr.txt)  
@@ -92,8 +92,6 @@ proxy-groups:
 
   - {name: 🤖 人工智能, type: select, proxies: [🚀 节点选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 新加坡节点, 🇺🇸 美国节点]}
 
-  - {name: 📥 下载软件, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
-
   - {name: Ⓜ️ Microsoft 中国, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
 
   - {name: 🗽 Google 中国, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
@@ -103,6 +101,8 @@ proxy-groups:
   - {name: 🇨🇳 国内 IP, type: select, proxies: [🎯 全球直连, 🚀 节点选择]}
 
   - {name: ✈️ Telegram, type: select, proxies: [🚀 节点选择]}
+
+  - {name: 🖥️ 直连软件, type: select, proxies: [🎯 全球直连]}
 
   - {name: 🏠 私有网络, type: select, proxies: [🎯 全球直连]}
 
@@ -225,11 +225,11 @@ rule-providers:
     path: ./ruleset/networktest.yaml
     interval: 86400
 
-  download:
+  applications:
     type: http
     behavior: classical
-    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/download.yaml"
-    path: ./ruleset/download.yaml
+    url: "https://cdn.jsdelivr.net/gh/DustinWin/clash-ruleset@release/applications.yaml"
+    path: ./ruleset/applications.yaml
     interval: 86400
 
   proxy:
@@ -284,7 +284,7 @@ rules:
   - RULE-SET,bilibili,📺 哔哩哔哩
   - RULE-SET,openai,🤖 人工智能
   - RULE-SET,networktest,📈 网络测试
-  - RULE-SET,download,📥 下载软件
+  - RULE-SET,applications,🖥️ 直连软件
   - RULE-SET,proxy,🪜 代理域名
   - RULE-SET,cn,⚡ 直连域名
   - RULE-SET,telegramip,✈️ Telegram
