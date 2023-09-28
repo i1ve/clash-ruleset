@@ -17,29 +17,24 @@ jobs:
       - name: Set variables
         run: |
           echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
-          echo "ads=https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-clash.yaml" >> $GITHUB_ENV
-          echo "private1=https://rules.kr328.app/private.yaml" >> $GITHUB_ENV
-          echo "private2=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml" >> $GITHUB_ENV
-          echo "microsoft_cn=https://rules.kr328.app/microsoft@cn.yaml" >> $GITHUB_ENV
-          echo "apple_cn=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/apple.china.conf" >> $GITHUB_ENV
-          echo "google_cn=https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/google.china.conf" >> $GITHUB_ENV
-          echo "games_cn1=https://rules.kr328.app/category-games@cn.yaml" >> $GITHUB_ENV
-          echo "games_cn2=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.yaml" >> $GITHUB_ENV
-          echo "netflix=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_Classical.yaml" >> $GITHUB_ENV
-          echo "disney=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Disney/Disney.yaml" >> $GITHUB_ENV
-          echo "max=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HBO/HBO.yaml" >> $GITHUB_ENV
-          echo "primevideo=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/PrimeVideo/PrimeVideo.yaml" >> $GITHUB_ENV
-          echo "appletv=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/AppleTV/AppleTV.yaml" >> $GITHUB_ENV
-          echo "youtube=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml" >> $GITHUB_ENV
-          echo "tiktok=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok.yaml" >> $GITHUB_ENV
+          echo "category-ads-all=https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-domains.txt" >> $GITHUB_ENV
+          echo "private1=https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/private" >> $GITHUB_ENV
+          echo "private2=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.list" >> $GITHUB_ENV
+          echo "openai=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.list" >> $GITHUB_ENV
+          echo "telegram=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.list" >> $GITHUB_ENV
+          echo "tiktok=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok.list" >> $GITHUB_ENV
+          echo "netflix=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.list" >> $GITHUB_ENV
+          echo "youtube=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.list" >> $GITHUB_ENV
+          echo "douyu=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Douyu/Douyu.list" >> $GITHUB_ENV
           echo "bilibili=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili.yaml" >> $GITHUB_ENV
-          echo "openai=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml" >> $GITHUB_ENV
-          echo "networktest=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest.yaml" >> $GITHUB_ENV
-          echo "applications=https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/applications.txt" >> $GITHUB_ENV
-          echo "proxy=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy_Domain.yaml" >> $GITHUB_ENV
-          echo "cn=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Domain.yaml" >> $GITHUB_ENV
+          echo "bytedance=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ByteDance/ByteDance.list" >> $GITHUB_ENV
+          echo "gfw=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy_Domain_For_Clash.txt" >> $GITHUB_ENV
+          echo "cn=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Domain_For_Clash.txt" >> $GITHUB_ENV
           echo "telegramip=https://core.telegram.org/resources/cidr.txt" >> $GITHUB_ENV
-          echo "cnip=https://raw.githubusercontent.com/DustinWin/clash-geoip/release/text/cn.txt" >> $GITHUB_ENV
+          echo "nxip=https://raw.githubusercontent.com/QiuSimons/Netflix_IP/master/getflix.txt" >> $GITHUB_ENV
+          echo "blip=https://raw.githubusercontent.com/xishang0128/geoip/release/text/bilibili.txt" >> $GITHUB_ENV
+          echo "privateip=https://raw.githubusercontent.com/i1ve/clash-geoip/release/text/private.txt" >> $GITHUB_ENV
+          echo "cnip=https://raw.githubusercontent.com/Hackl0us/GeoIP2-CN/release/CN-ip-cidr.txt" >> $GITHUB_ENV
         shell: bash
 
       - name: Checkout codebase
@@ -56,190 +51,82 @@ jobs:
           tag_name: latest
           github_token: ${{ secrets.GITHUB_TOKEN }}
           delete_release: true
-          repo: DustinWin/clash-ruleset
+          repo: i1ve/clash-ruleset
 
-      - name: Generate ads
+      - name: Generate category-ads-all
         run: |
           mkdir -p ./tmp ./publish
-          curl -sSL ${ads} | grep -v '#' | sed '/^\s*$/d' > ./publish/ads.yaml
+          curl -sSL ${category-ads-all} | grep -v '#' | sed '/^\s*$/d' > ./publish/category-ads-all.txt
 
       - name: Generate private
         run: |
-          cat <<EOF > ./tmp/temp-private.yaml
-            - 'clash.razord.top'
-            - 'clash.metacubex.one'
-            - 'yacd.haishan.me'
-            - 'yacd.metacubex.one'
-            - 'd.metacubex.one'
-          EOF
-          curl -sSL ${private1} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '/^\s*$/d' >> ./tmp/temp-private.yaml
-          curl -sSL ${private2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./tmp/temp-private.yaml
-          echo 'payload:' > ./publish/private.yaml
-          sort --ignore-case -u ./tmp/temp-private.yaml >> ./publish/private.yaml
-
-      - name: Generate microsoft-cn
-        run: |
-          echo 'payload:' > ./publish/microsoft-cn.yaml
-          curl -sSL ${microsoft_cn} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '/^\s*$/d' >> ./publish/microsoft-cn.yaml
-
-      - name: Generate apple-cn
-        run: |
-          echo 'payload:' > ./publish/apple-cn.yaml
-          curl -sSL ${apple_cn} | perl -ne '/^server=\/([^\/]+)\// && print "$1\n"' | sed "s/^/  - '/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/apple-cn.yaml
-
-      - name: Generate google-cn
-        run: |
-          echo 'payload:' > ./publish/google-cn.yaml
-          curl -sSL ${google_cn} | perl -ne '/^server=\/([^\/]+)\// && print "$1\n"' | sed "s/^/  - '/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/google-cn.yaml
-
-      - name: Generate games-cn
-        run: |
-          curl -sSL ${games_cn1} | grep -Ev '#|payload:' | sed 's/"/'\''/g' | sed 's/^/  /g' | sed '/^\s*$/d' > ./tmp/temp-games-cn.yaml
-          curl -sSL ${games_cn2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./tmp/temp-games-cn.yaml
-          echo 'payload:' > ./publish/games-cn.yaml
-          sort --ignore-case -u ./tmp/temp-games-cn.yaml >> ./publish/games-cn.yaml
-
-      - name: Generate netflix
-        run: |
-          curl -sSL ${netflix} | grep -v '#' | sed '/^\s*$/d' > ./publish/netflix.yaml
-
-      - name: Generate disney
-        run: |
-          echo 'payload:' > ./publish/disney.yaml
-          curl -sSL ${disney} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/disney.yaml
-
-      - name: Generate max
-        run: |
-          echo 'payload:' > ./publish/max.yaml
-          curl -sSL ${max} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/max.yaml
-
-      - name: Generate primevideo
-        run: |
-          echo 'payload:' > ./publish/primevideo.yaml
-          curl -sSL ${primevideo} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/primevideo.yaml
-
-      - name: Generate appletv
-        run: |
-          echo 'payload:' > ./publish/appletv.yaml
-          curl -sSL ${appletv} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/appletv.yaml
-
-      - name: Generate youtube
-        run: |
-          echo 'payload:' > ./publish/youtube.yaml
-          curl -sSL ${youtube} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/youtube.yaml
-
-      - name: Generate tiktok
-        run: |
-          echo 'payload:' > ./publish/tiktok.yaml
-          curl -sSL ${tiktok} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/tiktok.yaml
-
-      - name: Generate bilibili
-        run: |
-          echo 'payload:' > ./publish/bilibili.yaml
-          curl -sSL ${bilibili} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/bilibili.yaml
+          curl -sSL ${private1} | grep -v '#' | sed '/^\s*$/d' > ./tmp/temp-private.txt
+          curl -sSL ${private2} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,//g" | sed "s/DOMAIN-SUFFIX,/+./g" | sed '/^\s*$/d' >> ./tmp/temp-private.txt
+          sort --ignore-case -u ./tmp/temp-private.txt >> ./publish/private.txt
 
       - name: Generate openai
         run: |
-          echo 'payload:' > ./publish/openai.yaml
-          curl -sSL ${openai} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,/'/g" | sed "s/DOMAIN-SUFFIX,/'+./g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/openai.yaml
+          curl -sSL ${openai} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,//g" | sed "s/DOMAIN-SUFFIX,/+./g" | sed '/^\s*$/d' >> ./publish/openai.txt
 
-      - name: Generate networktest
+      - name: Generate telegram
         run: |
-          curl -sSL ${networktest} | grep -v '#' | sed '/^\s*$/d' > ./publish/networktest.yaml
-          cat <<EOF >> ./publish/networktest.yaml
-            - DOMAIN-KEYWORD,ipv6-test
-            - DOMAIN-KEYWORD,ipv6test
-            - DOMAIN-KEYWORD,test-ipv6
-            - DOMAIN-KEYWORD,testipv6
-          EOF
+          curl -sSL ${telegram} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,//g" | sed "s/DOMAIN-SUFFIX,/+./g" | sed '/^\s*$/d' >> ./publish/telegram.txt
 
-      - name: Generate applications
+      - name: Generate tiktok
         run: |
-          curl -sSL ${applications} | sed '/^\s*$/d' > ./publish/applications.yaml
+          curl -sSL ${tiktok} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,//g" | sed "s/DOMAIN-SUFFIX,/+./g" | sed '/^\s*$/d' >> ./publish/tiktok.txt
 
-      - name: Generate proxy
+      - name: Generate netflix
+        run: |
+          curl -sSL ${netflix} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,//g" | sed "s/DOMAIN-SUFFIX,/+./g" | sed '/^\s*$/d' >> ./publish/netflix.txt
+
+      - name: Generate youtube
+        run: |
+          curl -sSL ${youtube} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,//g" | sed "s/DOMAIN-SUFFIX,/+./g" | sed '/^\s*$/d' >> ./publish/youtube.txt
+
+      - name: Generate douyu
+        run: |
+          curl -sSL ${douyu} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,//g" | sed "s/DOMAIN-SUFFIX,/+./g" | sed '/^\s*$/d' >> ./publish/douyu.txt
+
+      - name: Generate bilibili
+        run: |
+          curl -sSL ${bilibili} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,//g" | sed "s/DOMAIN-SUFFIX,/+./g" | sed '/^\s*$/d' >> ./publish/bilibili.txt
+
+      - name: Generate bytedance
+        run: |
+          curl -sSL ${bytedance} | grep -Ev '#|DOMAIN-KEYWORD' | grep 'DOMAIN' | sed "s/DOMAIN,//g" | sed "s/DOMAIN-SUFFIX,/+./g" | sed '/^\s*$/d' >> ./publish/bytedance.txt
+
+      - name: Generate gfw
         run: |
           cd gfwlist2dnsmasq || exit 1
           chmod +x ./gfwlist2dnsmasq.sh
-          ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-proxy1.yaml
-          sed "s/^/  - '+./g" ../tmp/temp-proxy1.yaml | sed "s/$/'/g" | sed '/^\s*$/d' > ../tmp/temp-proxy2.yaml
-          curl -sSL ${proxy} | grep -Ev '#|payload:' | sed '/^\s*$/d' >> ../tmp/temp-proxy2.yaml
-          echo 'payload:' > ../publish/proxy.yaml
-          sort --ignore-case -u ../tmp/temp-proxy2.yaml >> ../publish/proxy.yaml
+          ./gfwlist2dnsmasq.sh -l -o ../tmp/temp-gfw.txt
+          curl -sSL ${gfw} | grep -Ev '#|payload:' | sed '/^\s*$/d' >> ../tmp/temp-gfw.txt
+          sort --ignore-case -u ../tmp/temp-gfw.txt >> ../publish/gfw.txt
 
       - name: Generate cn
         run: |
-          curl -sSL ${cn} | grep -Ev '#|google' > ./publish/cn.yaml
+          curl -sSL ${cn} | grep -Ev '#|google' > ./publish/cn.txt
 
       - name: Generate telegramip
         run: |
-          echo 'payload:' > ./publish/telegramip.yaml
-          curl -sSL ${telegramip} | sed "s/^/  - '/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/telegramip.yaml
+          curl -sSL ${telegramip} | sed '/^\s*$/d' >> ./publish/telegramip.txt
+
+      - name: Generate nxip
+        run: |
+          curl -sSL ${nxip} | sed '/^\s*$/d' >> ./publish/nxip.txt
+
+      - name: Generate blip
+        run: |
+          curl -sSL ${blip} | sed '/^\s*$/d' >> ./publish/blip.txt
 
       - name: Generate privateip
         run: |
-          echo 'payload:' > ./publish/privateip.yaml
-          curl -sSL ${private2} | grep -v '#' | grep 'IP-CIDR' | sed "s/IP-CIDR,/'/g" | sed "s/IP-CIDR6,/'/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/privateip.yaml
+          curl -sSL ${privateip} | sed '/^\s*$/d' >> ./publish/privateip.txt
 
       - name: Generate cnip
         run: |
-          echo 'payload:' > ./publish/cnip.yaml
-          curl -sSL ${cnip} | sed "s/^/  - '/g" | sed "s/$/'/g" | sed '/^\s*$/d' >> ./publish/cnip.yaml
-
-      - name: Generate fake-ip-user.yaml
-        env:
-          SED: sed 's/^/    - /g' | sed '/^\s*$/d'
-        run: |
-          cat <<EOF > ./publish/fake-ip-user.yaml
-          dns:
-            enable: true
-            prefer-h3: true
-            ipv6: true
-            listen: 0.0.0.0:1053
-            use-hosts: true
-            fake-ip-range: 198.18.0.1/16
-            enhanced-mode: fake-ip
-            fake-ip-filter:
-          EOF
-          curl -sSL https://raw.githubusercontent.com/juewuy/ShellClash/master/public/fake_ip_filter.list | grep -v '#' | sed "s/.*/'&'/g" | ${{ env.SED }} >> ./publish/fake-ip-user.yaml
-          curl -sSL https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt | grep 'udp:' | grep -i '\.[A-Z]' | sed "s/^.*\/\//'/g" | sed "s/:.*\/.*/'/g" | ${{ env.SED }} >> ./publish/fake-ip-user.yaml
-          cat <<EOF >> ./publish/fake-ip-user.yaml
-              - 'adguardteam.github.io'
-              - 'anti-ad.net'
-            default-nameserver:
-              - https://223.5.5.5/dns-query
-              - https://1.12.12.12/dns-query
-            nameserver:
-              - https://dns.alidns.com/dns-query
-              - https://doh.pub/dns-query
-          EOF
-
-      - name: Generate redir-host-user.yaml
-        run: |
-          cat <<EOF > ./publish/redir-host-user.yaml
-          dns:
-            enable: true
-            prefer-h3: true
-            ipv6: true
-            listen: 0.0.0.0:1053
-            use-hosts: true
-            fake-ip-range: 198.18.0.1/16
-            enhanced-mode: fake-ip
-            fake-ip-filter: ['+.*']
-            default-nameserver:
-              - https://223.5.5.5/dns-query
-              - https://1.12.12.12/dns-query
-            nameserver:
-              - 'https://dns.google/dns-query#🪜 代理域名'
-              - https://cloudflare-dns.com/dns-query
-            proxy-server-nameserver:
-              - https://dns.alidns.com/dns-query
-              - https://doh.pub/dns-query
-            nameserver-policy:
-              'rule-set:microsoft-cn,apple-cn,google-cn,games-cn': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
-              'rule-set:cn,private': [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
-          EOF
-          rm -rf ./tmp
+          curl -sSL ${cnip} | sed '/^\s*$/d' >> ./publish/cnip.txt
 
       - name: Release and upload assets
         uses: svenstaro/upload-release-action@v2
